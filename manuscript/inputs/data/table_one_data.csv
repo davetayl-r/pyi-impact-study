@@ -1,0 +1,20 @@
+variable,total,n_percent,mean_sd
+aboriginal,295,97 (32.88),NA
+any_housing_spell_before_18,295,91 (30.85),NA
+eligible_foster_care_placement,295,127 (43.05),NA
+eligible_kinship_care_placement,295,92 (31.19),NA
+eligible_permanent_placement,295,218 (73.9),NA
+eligible_placement_instability,295,292 (98.98),NA
+eligible_residential_care_placement,295,61 (20.68),NA
+eligible_time_in_care,295,292 (98.98),NA
+female,295,150 (50.85),NA
+independent_living_placement_after_16,295,59 (20),NA
+last_placement_independent_living,295,44 (14.92),NA
+last_placement_self_placed_missing_absent,295,24 (8.14),NA
+male,295,145 (49.15),NA
+non_aboriginal,295,198 (67.12),NA
+permanent_responsibility_minister_eligiblity_period,295,287 (97.29),NA
+placement_breakdown_after_16,295,65 (22.03),NA
+placement_ended_disruptive_behaviour_after_16,295,107 (36.27),NA
+self_placed_missing_absent_from_placement_after_16,295,54 (18.31),NA
+time_in_care_start_eligible_window (mean (SD)),NA,NA,107.36 (54.6)

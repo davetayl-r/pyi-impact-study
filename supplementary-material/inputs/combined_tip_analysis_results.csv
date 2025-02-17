@@ -1,0 +1,49 @@
+outcome,matching_specification,scenario,confounder_prevalence_exposed,confounder_prevalence_unexposed,confounder_outcome_relationship
+In homelessness spell on 18th birthday,Full,High,0.95,0.75,0.3039454974545419
+In homelessness spell on 18th birthday,Full,Medium,0.75,0.55,0.191376258183193
+In homelessness spell on 18th birthday,Full,Low,0.25,0.04999999999999999,NA
+In homelessness spell on 18th birthday,Nearest Neighbour,High,0.95,0.75,0.3810487482518722
+In homelessness spell on 18th birthday,Nearest Neighbour,Medium,0.75,0.55,0.29360378380279156
+In homelessness spell on 18th birthday,Nearest Neighbour,Low,0.25,0.04999999999999999,NA
+In homelessness spell on 19th birthday,Full,High,0.95,0.75,NA
+In homelessness spell on 19th birthday,Full,Medium,0.75,0.55,NA
+In homelessness spell on 19th birthday,Full,Low,0.25,0.04999999999999999,2.3589829815851604
+In homelessness spell on 19th birthday,Nearest Neighbour,High,0.95,0.75,NA
+In homelessness spell on 19th birthday,Nearest Neighbour,Medium,0.75,0.55,NA
+In homelessness spell on 19th birthday,Nearest Neighbour,Low,0.25,0.04999999999999999,2.8606593109133365
+New homelessness spell between 18th & 19th birthday,Full,High,0.95,0.75,1.0163652959730858
+New homelessness spell between 18th & 19th birthday,Full,Medium,0.75,0.55,1.0163119061387167
+New homelessness spell between 18th & 19th birthday,Full,Low,0.25,0.04999999999999999,1.0161799432806546
+New homelessness spell between 18th & 19th birthday,Nearest Neighbour,High,0.95,0.75,1.9637556067509092
+New homelessness spell between 18th & 19th birthday,Nearest Neighbour,Medium,0.75,0.55,1.8080106482398
+New homelessness spell between 18th & 19th birthday,Nearest Neighbour,Low,0.25,0.04999999999999999,1.5755039773416104
+Any homelessness spell between 18th & 19th birthday,Full,High,0.95,0.75,0.7539417074006391
+Any homelessness spell between 18th & 19th birthday,Full,Medium,0.75,0.55,0.7412060267626834
+Any homelessness spell between 18th & 19th birthday,Full,Low,0.25,0.04999999999999999,0.7027416982716554
+Any homelessness spell between 18th & 19th birthday,Nearest Neighbour,High,0.95,0.75,1.0121924812739331
+Any homelessness spell between 18th & 19th birthday,Nearest Neighbour,Medium,0.75,0.55,1.0121628222773622
+Any homelessness spell between 18th & 19th birthday,Nearest Neighbour,Low,0.25,0.04999999999999999,1.0120893022599395
+New unsheltered homelessness spell between 18th and 19th birthday,Full,High,0.95,0.75,0.7912068472768541
+New unsheltered homelessness spell between 18th and 19th birthday,Full,Medium,0.75,0.55,0.7912068472768541
+New unsheltered homelessness spell between 18th and 19th birthday,Full,Low,0.25,0.04999999999999999,0.7912068472768541
+New unsheltered homelessness spell between 18th and 19th birthday,Nearest Neighbour,High,0.95,0.75,1.3153609926731147
+New unsheltered homelessness spell between 18th and 19th birthday,Nearest Neighbour,Medium,0.75,0.55,1.3153609926731147
+New unsheltered homelessness spell between 18th and 19th birthday,Nearest Neighbour,Low,0.25,0.04999999999999999,1.3153609926731147
+New or ongoing unsheltered homelessness spell between 18th and 19th birthday,Full,High,0.95,0.75,0.5904310384975888
+New or ongoing unsheltered homelessness spell between 18th and 19th birthday,Full,Medium,0.75,0.55,0.5538883406944071
+New or ongoing unsheltered homelessness spell between 18th and 19th birthday,Full,Low,0.25,0.04999999999999999,0.42581246332508926
+New or ongoing unsheltered homelessness spell between 18th and 19th birthday,Nearest Neighbour,High,0.95,0.75,0.7839212226343594
+New or ongoing unsheltered homelessness spell between 18th and 19th birthday,Nearest Neighbour,Medium,0.75,0.55,0.7741614385879741
+New or ongoing unsheltered homelessness spell between 18th and 19th birthday,Nearest Neighbour,Low,0.25,0.04999999999999999,0.7454137413878559
+In new homelessness spell that requires short term accommodation between 18th & 19th birthday,Full,High,0.95,0.75,1.0161799432806546
+In new homelessness spell that requires short term accommodation between 18th & 19th birthday,Full,Medium,0.75,0.55,1.0161799432806546
+In new homelessness spell that requires short term accommodation between 18th & 19th birthday,Full,Low,0.25,0.04999999999999999,1.0161799432806546
+In new homelessness spell that requires short term accommodation between 18th & 19th birthday,Nearest Neighbour,High,0.95,0.75,1.5755039773416104
+In new homelessness spell that requires short term accommodation between 18th & 19th birthday,Nearest Neighbour,Medium,0.75,0.55,1.5755039773416104
+In new homelessness spell that requires short term accommodation between 18th & 19th birthday,Nearest Neighbour,Low,0.25,0.04999999999999999,1.5755039773416104
+In new or ongoing homelessness spell that requires short term accommodation between 18th & 19th birthday,Full,High,0.95,0.75,0.7539417074006391
+In new or ongoing homelessness spell that requires short term accommodation between 18th & 19th birthday,Full,Medium,0.75,0.55,0.7412060267626834
+In new or ongoing homelessness spell that requires short term accommodation between 18th & 19th birthday,Full,Low,0.25,0.04999999999999999,0.7027416982716554
+In new or ongoing homelessness spell that requires short term accommodation between 18th & 19th birthday,Nearest Neighbour,High,0.95,0.75,1.0121924812739331
+In new or ongoing homelessness spell that requires short term accommodation between 18th & 19th birthday,Nearest Neighbour,Medium,0.75,0.55,1.0121628222773622
+In new or ongoing homelessness spell that requires short term accommodation between 18th & 19th birthday,Nearest Neighbour,Low,0.25,0.04999999999999999,1.0120893022599395

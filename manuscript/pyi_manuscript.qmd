@@ -1,0 +1,1645 @@
+---
+title: "A Hybrid type-1 Implementation-Effectiveness Study of an Accommodation and Support Intervention for Care Leavers in Australia: Using Propensity Score Matching to Examine Homelessness Outcomes"
+author:
+  - name: David Taylor
+    corresponding: true
+    email: david.taylor@monash.edu
+    orcid: 0000-0001-8801-7488
+    affiliations: 
+    - name: Monash University
+      department: Data Matters
+      city: Melbourne
+    role: 
+    - formal analysis
+    - writing
+    - visualisation
+    - conceptualisation
+    - methodology
+    - project administration
+  - name: Jessica Roberts
+    #orcid:
+    affiliations: 
+    - name: Monash University
+      department: Data Matters
+      city: Melbourne
+    role: 
+    - data curation
+    - conceptualisation
+    - methodology
+    - editing
+  - name: Vanessa Rose
+    #orcid:
+    affiliations: 
+    - name: Centre for Evidence and Implementation
+      city: Sydney
+    role: 
+    - conceptualisation
+    - methodology
+    - funding acquisition
+    - project administration
+    - editing
+  - name: Alex Gyani
+    affiliations: 
+    - name: Behavioural Insights Team
+      city: Sydney
+    role: 
+    - conceptualisation
+    - editing
+    - methodology
+  - name: Aron Shlonsky
+    orcid: 0000-0001-8096-726X
+    affiliations: 
+    - name: Monash University
+      department: Data Matters  
+      city: Melbourne
+    role: 
+    - conceptualisation
+    - editing
+    - methodology
+    - supervision
+    - editing
+#abstract: |
+#  **Abstract**
+#  
+#  **Background**: ...
+#  
+#  **Methods**: ...
+#  
+#  **Results**: ...
+#  
+#  **Discussion**: ...
+#  
+#  **Conclusion**: ...
+#mask: true
+#masked-citations:
+keywords: [care leaver, program evaluation, treatment effect]
+floatsintext: true
+suppress-short-title: true
+#numbered-lines: true
+bibliography: pyi_manuscript.bib    
+format: 
+  apaquarto-pdf: default
+  #apaquarto-docx: default
+documentmode: doc
+#documentmode: jou
+date: 2025-02-14
+csl: apa-6th-edition.csl
+link-citations: true
+#tbl-cap-location: "top"
+#fig-cap-location: "top"
+---
+
+```{r}
+#| echo: false
+#| message: false
+#| name: pyi-manuscript-global-options
+
+# load required packages 
+library(quarto) 
+library(tidyverse)
+library(dagitty)
+library(ggdag)
+library(ggplot2)
+library(cowplot)
+library(tinytable)
+library(readxl)
+library(showtext)
+
+# ensure required fonts are loaded
+font_add_google("Roboto", "roboto")
+showtext_auto()
+showtext_opts(dpi = 300)
+
+# set knitr defaults
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  cache = FALSE
+)
+```
+
+# Introduction
+
+## Background 
+
+Children and adolescents who experience abuse or neglect by their parents or carers can be removed from their families and placed in out-of-home care (OOHC) arrangements to protect their safety and wellbeing. If they are not restored to their families, young people will remain in OOHC until formal support ceases, this varies between and within countries, but typically ends between the ages of 18 and 21 [@strahl2021multinationalcomparisoncareleaving]. These youth have often experienced significant trauma and disruption before, and during, their time in OOHC through multiple placements, changes in schools, and irregular family contact [@sanders2021homelessnesschildrenssocial]. These compounding disruptions can exacerbate difficulties in forming stable relationships, maintaining educational continuity, and developing key life skills [@nunez2022resiliencefactorsyouth]. Once young people ‘age out’ of OOHC, they become care leavers; with many lacking the material resources, social networks, and independent living skills needed to thrive [@courtney2006earlyoutcomesyoung]. Consequently, care leavers tend to have lower educational attainment and higher rates of unemployment, homelessness, financial stress, and physical and mental health challenges relative to peers without care experience [@crawford2018riskseriouscriminal; @greeno2019prevalencesubstanceuse; @gypen2017outcomeschildrenwho; @havlicek2013mentalhealthsubstance; @fowler2017homelessnessagingout; @harrison2023careleaverstransition]. Moreover, the assistance they receive before or after leaving OOHC frequently proves insufficient to prevent these adverse outcomes [@petaja2022prevalencehighriskbehavior; @taylor2024systematicreviewmetaanalysis].
+
+In Australia specifically, findings from a data linkage project from the Australian Institute of Health and Welfare (AIHW) highlight the challenges faced by care-experienced young people (CEYP). Using linked data from state and national sources, the AIHW [-@australianinstituteofhealthandwelfare2022incomesupportreceipt; -@australianinstituteofhealthandwelfare2023specialisthomelessnessservice; -@australianinstituteofhealthandwelfare2021incomesupportreceipt] reported that between 18 and 30 years of age, CEYP were 9–10 times more likely to access specialist homelessness services (SHS) compared to their peers in the general population, with the annual prevalence of CEYP requiring SHS peaking at 21% at age 18 alone. CEYP were also three times more likely to receive income support payments between the ages of 16 and 30. Nearly half (46%) of CEYP received both income support and SHS, compared to 5.7% of non-care peers—a ```r round(46/5.7, 1)```-fold difference. compared to just 5.7% of young people without care experience. Consistent with research by Mendes et al. [@mendes2020indigenouscareleavers; @mendes2023youngpeopletransitioning] highlighting their vulnerability, the use of both income support and SHS was ```r round(66/41, 1)``` times higher among CEYP who had been in residential care (66%) than those in foster care (41%). Likewise, Aboriginal and Torres Strait Islander CEYP (59%) were ```r round(59/41, 1)``` times more likely than their non-Aboriginal counterparts (41%) to access both forms of support [@australianinstituteofhealthandwelfare2023specialisthomelessnessservice].
+
+A longitudinal study of care leavers in New South Wales by Cashmore and Paxman [-@cashmore2006wardsleavingcare; -@cashmore2007longitudinalstudywards] found that 39% of participants experienced homelessness at some point after leaving care. Frequent moves were also common, with respondents living in an average of 8.5 different places four to five years after exiting OOHC—one-third having moved more than ten times. Educational and employment outcomes were similarly limited, as only 42% completed secondary school and just one in four was engaged in full-time work or study. Nearly half reported mental health problems, including depression, suicidal ideation, or having a diagnosed disorder.
+
+## Existing evidence
+
+A recent systematic review by @taylor2024systematicreviewmetaanalysis examined the impact of two broad categories of support provided to care leavers: transition support programs (TSPs) and extended care policies. The review identified only 14 studies that used experimental or observation methods of sufficient methodological quality to make causal claims about effectiveness, with all but one conducted in the United States. It found that the evidence for TSPs is limited, with most showing small or null effects when synthesised. Independent Living Programs (ILPs), the most common type of TSP, showed no meaningful impact across housing, education, employment and life skills outcomes in meta-analyses. While individual studies like YVLifeSet demonstrated some promising results on economic hardship and mental health [@courtney2019experimentalevaluationtransitional], these effects were modest. Other TSPs, including coaching and peer support programs, showed potential benefits for quality of life but evidence quality was very low [@geenen2015betterfuturesrandomized; @powers2012mylifeeffects]. 
+
+Extended care policies appear more promising, though evidence is limited to two observational studies from the United States. In Washington, extended care led to substantial reductions in homelessness and improved educational outcomes [@miller2020extendedfostercare]. Similarly, in Illinois, extended care led to small improvements in educational attainment and reduced criminal justice involvement, though these effects diminished over time [@courtney2017potentialeducationalbenefits]. Overall the review identified that while some interventions showed promise, particularly extended care, the scope and strength of included evidence is insufficient to recommend any included approach.
+
+Subsequent to the completion of the aforementioned systematic review, two recent studies have examined the impact of extended care in the United Kingdom [@picker2024quasiexperimentalevaluationstaying] and in the United States [@spindle-jackson2024extendedfostercare], both studies found that it lead to a persistent reduction in homelessness amongst care leavers. Another TSP from the UK, Lifelong Links, also lead to reduction in homelessness amongst care leavers [@sanders2023impactslifelonglinks]. Collectively, these recent findings add to the growing, though still limited, evidence suggesting that both extended care policies and targeted TSPs can potentially help reduce homelessness among care leavers.
+
+## Rationale
+
+We used a hybrid Type-1 implementation-effectiveness study, where the primary aim was to assess the effectiveness of the intervention, while also collecting information about its implementation [@curran2012effectivenessimplementationhybriddesigns]. Our rationale for doing so is twofold. Firstly, the use of causal methods to assess the intervention’s impact is crucial given that the program is novel and that evidence on the effectiveness of interventions for care leavers remains limited [@taylor2024systematicreviewmetaanalysis]. Secondly, the intervention has multiple active components and is delivered to a vulnerable population within a complex service system where a wide range of implementation barriers can potentially significantly affect outcomes [@fixsen2005implementationresearchsynthesis]. By collecting information about the intervention's implementation, we can understand not just whether the intervention works, but what factors may influence its success.
+
+## Objectives
+
+### Primary objective
+
+To estimate the impact of the Premier's Youth Initiative (PYI) on homelessness outcomes among youth leaving out-of-home care (OOHC) at age 18. Specifically, this study estimates the average treatment effect on the treated (ATT) by comparing specialist homelessness service (SHS) utilisation in the 12 months post-OOHC between PYI participants and matched controls receiving usual services.
+
+### Implementation objectives
+
+To examine the implementation of PYI through: a) assessment of intervention acceptability among PYI recipients; and b) identification of barriers and facilitators to implementation from the perspectives of service providers and funders. 
+
+# Methodology
+
+## Study design and setting
+
+This study used a Type-1 implementation-effectiveness hybrid approach [@curran2012effectivenessimplementationhybriddesigns] to examine intervention effectiveness using a propensity score matching approach while aspects of the intervention’s implementation was explored through qualitative interviews with service providers, the funder and participants.
+
+The Premier's Youth Initiative (PYI) was developed and funded by the NSW Department of Communities and Justice (DCJ). PYI was delivered by seven consortia of non-government agencies (NGOs) that provide either support services, housing services, or both. PYI is available in ten administrative regions used by DCJ: Central Coast, Hunter, Illawarra Shoalhaven, Mid-North Coast, Nepean Blue Mountains, New England, Northern NSW, Southern NSW, South-Western Sydney, and Western NSW. An independent evaluation of PYI was completed between 2017 and 2020 and previously published as a technical report [@taylor2020evaluationpremieryouth]. This study updates the quantitative aspects of this prior work to take advantage of a dataset with a longer follow-up period.
+
+Reporting of this study follows the STROBE (Strengthening the Reporting of Observational Studies in Epidemiology) guidelines [@elm2007strengtheningreportingobservational] and the RECORD (REporting of studies Conducted using Observational Routinely-collected Data) extension [@benchimol2015reportingstudiesconducted]. A completed STROBE-RECORD checklist is provided in Table 1 in the supplementary material. Additionally, we followed the guidance from @thoemmes2011systematicreviewpropensity in reporting studies using propensity score matching. 
+
+## Participants and recruitment
+
+### Intervention inclusion and exclusion criteria
+
+To be eligible for PYI, young people must be aged between 16 years, 9 months and 17 years, 6 months and meet at least one of the following inclusion criteria: they must either be in residential OOHC, have a history of placement instability, be in a permanent OOHC placement, or have been in care for 12 months or longer. Young people who are incapable of living independently due to support needs are excluded from the program.
+
+### Intervention recruitment
+
+Young people who met one or more of these criteria were identified through DCJ's administrative data systems, with PYI providers then approaching them directly to invite them to participate in the intervention. No option existed for self-referral or referral by other service providers, caseworkers, or DCJ staff.
+
+### Evaluation recruitment
+
+A convenient sample of PYI participants, PYI service providers and DCJ stakeholders were invited to participate in interviews or focus groups to understand the implementation of the program. Recruitment of DCJ stakeholders and PYI services providers was facilitated by DCJ. Recruitment of PYI participants was facilitated by PYI service providers. PYI participants who participated in a focus group received a gift voucher for their participation.
+
+### Ethical approval
+
+All research activities were reviewed and approved by the Monash University Human Research Ethics Committee (MUHREC: #18216). All participants who participated in primary data collection provided their informed consent. This work was conducted under a Research Agreement with DCJ, who retain ownership of unit-record data used in this analysis. Unit-record data was stored and analysed within Monash University’s Secure Research Platform (SeRP). All quantitative analysis and visualisation was undertaken using R version 4.3.3 [@rcoreteam2024languageenvironmentstatistical].
+
+## Intervention description and implementation
+
+The PYI intervention features four core components: (1) leaving care planning; (2) prosocial network development; (3) education and employment mentoring; and (4) transitional support. These components are supported through the provision of personal advice, education and employment mentoring, housing, transitional support and brokerage for additional supports. Three key worker roles — Personal Advisor (PA), Education and Employment Mentor (EEM), and Transition Support Worker (TSW) — collaborate to provide support services tailored to the needs of care leavers. While all participants received access to a PA and EEM, access to TSW and/or housing was rationed based on need. Additional details about the intervention are available in the technical report [@taylor2020evaluationpremieryouth].
+
+Service providers had significant latitude in the way they implemented PYI. All intervention components could be provided by a single agency, or in consortia with others providing specialist services (e.g., housing providers). Sites had the freedom to assign roles and responsibilities across the PA, EEW and TSW roles in any manner they saw fit. Client facing staff were expected to have completed training in motivational interviewing, trauma and addictions and trauma-informed practice [@taylor2020evaluationpremieryouth].
+
+## Data and measures
+
+This study used linked unit-record data from two DCJ-held data assets: a) ChildStory, which captures child and family interactions with the child protection and OOHC systems, and b) Client Information Management System (CIMS), which records interactions with Specialist Homelessness Services (SHS). Demographic characteristics and details of an individual’s OOHC history were sourced from ChildStory.
+
+The primary goal of PYI was to reduce homelessness amongst care leavers after exiting OOHC at age 18. Accordingly, the key outcome of interest was the use of homelessness services for housing-related reasons following the cessation of parental responsibility by the Minister (at age 18). Notably, since this study was conducted, the option to remain in care until age 21 has been implemented in NSW.
+
+Data on the use of SHS for housing-related reasons was sourced from CIMS, this was defined as a spell meeting any of the following criteria: (1) current or previous week residential dwelling was a tent, improvised dwelling, no dwelling (in the open), or motor vehicle, OR (2) sleeping rough or in non-conventional accommodation in last week, OR (3) in short-term or emergency accommodation in the last week, OR (4) requiring short-term accommodation.
+
+SHS use was tracked between ages 18 and 19. We distinguished between new (i.e., commencing after age 18) and ongoing homelessness spells and categorised them based on reported experiences, such as unsheltered homelessness or the need for short-term or emergency accommodation. Given the low frequency of such events, we also measured duration of SHS use and the frequency of distinct spells.
+
+Given the nature of service provision — where individuals may be referred between SHS providers within a continuous support episode — we aggregated service interactions across providers into ‘spells’ to reflect uninterrupted periods of homelessness assistance. Definitions for all variables used in our modelling are included in Table 2 of the supplementary material.
+
+## Identification and Estimation Strategy
+
+Our identification strategy capitalises on two key features of the intervention’s implementation. Firstly, PYI was a pilot program offered exclusively in distinct geographical catchments within NSW. This spatial restriction provides a natural comparison pool — care leavers in similar policy and administrative contexts but without access to the intervention. Secondly, the study was initially envisioned to be a randomised controlled trial (RCT) with eligibility determined by four explicit criteria recorded in administrative data. Although the RCT design did not proceed, the eligibility criteria (denoted as $X_i$) were retained to form a well-defined assignment mechanism. An individual was assigned to treatment if and only if they met one of the four eligibility criteria and resided in a location where PYI was offered. The transparent, administratively determined selection process provides a rare opportunity to credibly invoke a selection-on-observables assumption.
+
+We use the potential outcomes framework to specify our causal question. Let $Y_i(1)$ and $Y_i(0)$ denote individual ($i$)'s potential outcomes under intervention ($D_i = 1$) and comparison ($D_i = 0$) conditions, respectively. The observed outcome is therefore:
+\begin{center}
+$Y_i = D_i Y_i(1) + (1 - D_i) Y_i(0)$
+\end{center}
+Our estimand of interest is the average treatment effect on the treated (ATT):
+\begin{center}
+${ATT} = E\left[Y_i(1) - Y_i(0) \mid D_i = 1\right]$
+\end{center}
+Identification of the ATT requires satisfying the selection-on-observables assumption:
+\begin{center}
+${Y_i(1), Y_i(0)} \perp D_i \mid X_i$
+\end{center}
+which states that, conditional on $X_i$, potential outcomes are independent of treatment assignment. Given the explicitly defined selection criteria and the use of detailed administrative data, we argue that this assumption is plausible.
+
+In order to test this assumption, we developed a directed acyclic graph (DAG) that models the data generating process for this study (@fig-pyi-dag). The DAG was refined during a three-round Delphi process with a panel of experts (n=20) with content and technical expertise. The minimal adjustment set derived from this DAG using the backdoor criterion aligned exactly with the intervention's eligibility criteria $X_i$.
+
+```{r}
+#| label: fig-pyi-dag
+#| echo: false
+#| cache: true
+#| fig-cap: Directed Acyclic Graph of the data generating process for this study
+#| fig-height: 6
+#| fig-width: 8
+
+# specify dag
+dag_specification <- dagify(
+  # specify estimand
+  homeless ~ pyi,
+  # factors which affect selection into the intervention
+  pyi ~ time_care, 
+  pyi ~ instab, 
+  pyi ~ resi, 
+  pyi ~ perman,
+  # factors which affect the outcome
+  homeless ~ self_placed,
+  homeless ~ instab, 
+  homeless ~ resi, 
+  homeless ~ prior_shs,
+  homeless ~ kinship,
+  homeless ~ time_care,
+  homeless ~ perman,
+  homeless ~ unobserved_before_18,
+  # factors which are affected by the intervention
+  unobserved_post_18_mediator ~ pyi,
+  unobserved_post_18_compete ~ pyi,
+  # relationships between unobserved mediator/outcomes
+  unobserved_post_18_compete ~ unobserved_post_18_mediator,
+  # factors which affect intervention / outcome mediator
+  homeless ~ unobserved_post_18_mediator,
+  unobserved_post_18_mediator ~ self_placed,
+  unobserved_post_18_mediator ~ instab, 
+  unobserved_post_18_mediator ~ resi, 
+  unobserved_post_18_mediator ~ prior_shs,
+  unobserved_post_18_mediator ~ kinship,
+  unobserved_post_18_mediator ~ time_care,
+  unobserved_post_18_mediator ~ perman,
+  unobserved_post_18_mediator ~ unobserved_before_18,
+  # factors that affect competing outcomes
+  unobserved_post_18_compete ~ homeless,
+  unobserved_post_18_compete ~ self_placed,
+  unobserved_post_18_compete ~ instab, 
+  unobserved_post_18_compete ~ resi, 
+  unobserved_post_18_compete ~ prior_shs,
+  unobserved_post_18_compete ~ kinship,
+  unobserved_post_18_compete ~ time_care,
+  unobserved_post_18_compete ~ perman,
+  unobserved_post_18_compete ~ unobserved_before_18,
+  # specify potential relationships between confounds
+  homeless ~ unobserved_oohc,
+  prm ~ unobserved_oohc,
+  time_care ~ unobserved_oohc,
+  kinship ~ unobserved_oohc,
+  instab ~ unobserved_oohc,
+  resi ~ unobserved_oohc,
+  perman ~ unobserved_oohc,
+  self_placed ~ unobserved_oohc,
+  prior_shs ~ unobserved_oohc,
+  unobserved_before_18 ~ unobserved_oohc,
+  kinship ~ time_care,
+  instab ~ time_care,
+  resi ~ time_care,
+  perman ~ time_care,
+  self_placed ~ time_care,
+  prior_shs ~ time_care,
+  unobserved_before_18 ~ time_care,
+  kinship ~ instab,
+  resi ~ instab,
+  perman ~ instab,
+  self_placed ~ instab,
+  prior_shs ~ instab,
+  unobserved_before_18 ~ instab,
+  kinship ~ prior_shs,
+  resi ~ prior_shs,
+  perman ~ prior_shs,
+  self_placed ~ prior_shs,
+  unobserved_before_18 ~ prior_shs,
+  self_placed ~ kinship,
+  unobserved_before_18 ~ kinship,
+  perman ~ resi,
+  self_placed ~ resi,
+  unobserved_before_18 ~ resi,
+  self_placed ~ perman,
+  unobserved_before_18 ~ self_placed,
+  unobserved_before_18 ~ perman,
+  time_care ~ prm,
+  kinship ~ prm,
+  resi ~ prm,
+  perman ~ prm,
+  self_placed ~ prm,
+  unobserved_before_18 ~ prm,
+  # factors that affect competing outcomes/mediators
+  unobserved_post_18_mediator ~ unobserved_before_18,
+  # assign labels  
+  labels = c(
+    "homeless" = "Y[1]", 
+    "pyi" = "D",
+    "unobserved_oohc" = "Z[1]",
+    "time_care" = "X[1]", 
+    "prm" = "Z[2]",
+    "instab" = "X[2]",
+    "resi" = "X[3]",
+    "perman" = "X[4]",
+    "kinship" = "Z[3]",
+    "self_placed" = "Z[4]",
+    "prior_shs" = "Z[5]",
+    "unobserved_before_18" = "Z[6]",
+    "unobserved_post_18_mediator" = "M",
+    "unobserved_post_18_compete" = "Y[2]"
+  ),
+  # set coords
+  coords = data.frame(
+    name = c(
+      "homeless",
+      "pyi",
+      "unobserved_oohc",
+      "time_care",
+      "prm",
+      "instab",
+      "prior_shs",
+      "kinship",
+      "resi",
+      "perman",
+      "self_placed",
+      "unobserved_before_18",
+      "unobserved_post_18_mediator",
+      "unobserved_post_18_compete"
+    ),
+    x = c(
+      15, # homeless
+      11, # pyi
+      1, # unobserved_oohc
+      2, # time_care
+      2, # prm
+      3, # instab
+      4, # prior_shs
+      5, # kinship
+      5, # resi
+      6, # perman
+      7, # self_placed
+      8, # unobserved_before_18
+      13, # unobserved_post_18_mediator
+      15 # unobserved_post_18_compete
+    ),
+    y = c(
+      0, # homeless
+      0, # pyi
+      9, # unobserved_oohc
+      8, # time_care
+      1, # prm
+      7, # instab
+      6, # prior_shs
+      5, # kinship
+      4, # resi
+      3, # perman
+      2, # self_placed
+      1, # unobserved_before_18
+      -0, # unobserved_post_18_mediator
+      -2 # unobserved_post_18_compete
+    )
+  ),
+  exposure = "pyi",
+  outcome = "homeless"
+)
+
+# check if adjustment specific set is valid
+#dagitty::isAdjustmentSet(
+#  dag_specification,
+#  Z = c("instab", "perman", "resi", "time_care", "prior_shs", "kinship", "prm"),
+#  exposure = "pyi",
+#  outcome = "homeless" 
+#)
+
+# prep plot data
+pyi_dag_plot_data <- dag_specification |>
+  tidy_dagitty() |>
+  # name edges
+  mutate(
+    edge_name = paste(name, to, sep = "_")
+  ) |>
+  # specify node type
+  mutate(
+    node_type = case_when(
+      str_detect(name, "unobserved") ~ "unobserved",
+      TRUE ~ "observed"),
+    var_type = case_when(
+      name == "homeless" ~ "outcome",
+      name == "pyi" ~ "intervention",
+      name == "instab" ~ "adjusted",
+      name == "time_care" ~ "adjusted",
+      name == "prior_shs" ~ "adjusted",
+      name == "kinship" ~ "adjusted",
+      name == "resi" ~ "adjusted",
+      name == "perman" ~ "adjusted",
+      name == "prm" ~ "adjusted",
+      TRUE ~ "unadjusted"
+    ),
+    edge_colour = case_when(
+      var_type == "adjusted" ~ "#0EAD69",
+      TRUE ~ "#3C3C3C"
+    ),
+    edge_alpha = case_when(
+      var_type == "adjusted" ~ 0.5,
+      TRUE ~ 0.2
+  ))
+
+# plot dag
+pyi_dag <- pyi_dag_plot_data |>
+  ggplot(
+    aes(
+      x = x, 
+      y = y, 
+      xend = xend, 
+      yend = yend)) +
+  geom_dag_edges_arc(
+    aes(
+      edge_alpha = edge_alpha,
+      edge_colour = edge_colour
+      ),
+    curvature = c(
+      homeless_unobserved_post_18_compete = 0,
+      instab_homeless = 0.3,
+      instab_kinship = -0.6,
+      instab_perman = -0.6,
+      instab_prior_shs = -0.6,
+      instab_pyi = 0.2,
+      instab_resi = -0.6,
+      instab_self_placed = -0.6,
+      instab_unobserved_before_18 = -0.6,
+      instab_unobserved_post_18_compete = -0.5,
+      instab_unobserved_post_18_mediator = 0.3,
+      kinship_homeless = 0.3,
+      kinship_self_placed = -0.6,
+      kinship_unobserved_before_18 = -0.6,
+      kinship_unobserved_post_18_compete = -0.5,
+      kinship_unobserved_post_18_mediator = 0.3,
+      perman_homeless = 0.3,
+      perman_pyi = 0.2,
+      perman_self_placed = -0.6,
+      perman_unobserved_before_18 = -0.6,
+      perman_unobserved_post_18_compete = -0.35,
+      perman_unobserved_post_18_mediator = 0.3,
+      prior_shs_homeless = 0.3,
+      prior_shs_kinship = -0.6,
+      prior_shs_perman = -0.6,
+      prior_shs_resi = -0.6,
+      prior_shs_self_placed = -0.6,
+      prior_shs_unobserved_before_18 = -0.6,
+      prior_shs_unobserved_post_18_compete = -0.5,
+      prior_shs_unobserved_post_18_mediator = 0.3,
+      prm_kinship = 0.1,
+      prm_perman = -0.1,
+      prm_resi = -0.1,
+      prm_self_placed = -0.1,
+      prm_time_care = 0.1,
+      prm_unobserved_before_18 = -0.3,
+      pyi_homeless = -0.5,
+      pyi_unobserved_post_18_compete = -0.2,
+      pyi_unobserved_post_18_mediator = 0,
+      resi_homeless = 0.3,
+      resi_perman = -0.6,
+      resi_pyi = 0.2,
+      resi_self_placed = -0.6,
+      resi_unobserved_before_18 = -0.6,
+      resi_unobserved_post_18_compete = -0.4,
+      resi_unobserved_post_18_mediator = 0.3,
+      self_placed_homeless = 0.3,
+      self_placed_unobserved_before_18 = -0.6,
+      self_placed_unobserved_post_18_compete = -0.3,
+      self_placed_unobserved_post_18_mediator = 0.3,
+      time_care_homeless = 0.3,
+      time_care_instab = -0.6,
+      time_care_kinship = -0.6,
+      time_care_perman = -0.6,
+      time_care_prior_shs = -0.6,
+      time_care_pyi = 0.3,
+      time_care_resi = -0.6,
+      time_care_self_placed = -0.6,
+      time_care_unobserved_before_18 = -0.6,
+      time_care_unobserved_post_18_compete = -0.5,
+      time_care_unobserved_post_18_mediator = 0.3,
+      unobserved_before_18_homeless = 0.1,
+      unobserved_before_18_unobserved_post_18_compete = -0.2,
+      unobserved_before_18_unobserved_post_18_mediator = 0.3,
+      unobserved_oohc_homeless = 0.3,
+      unobserved_oohc_instab = -0.6,
+      unobserved_oohc_kinship = -0.6,
+      unobserved_oohc_perman = -0.6,
+      unobserved_oohc_prior_shs = -0.6,
+      unobserved_oohc_prm = -0.2,
+      unobserved_oohc_resi = -0.6,
+      unobserved_oohc_self_placed = -0.6,
+      unobserved_oohc_time_care = -0.6,
+      unobserved_oohc_unobserved_before_18 = -0.6,
+      unobserved_post_18_compete_NA = 0,
+      unobserved_post_18_mediator_homeless = 0
+    )
+  ) +
+  geom_dag_node(
+    aes(
+      shape = node_type,
+      colour = var_type),
+    size = 12) +
+  geom_dag_text(
+    aes(
+      label = label
+    ),
+    parse = TRUE
+  ) +
+  scale_colour_manual(
+    values = c(
+      adjusted = "#0EAD69", 
+      outcome = "#005377",
+      intervention = "#EE4266",
+      unadjusted = "#3C3C3C"),
+    breaks = c(
+      "intervention", 
+      "outcome", 
+      "adjusted", 
+      "unadjusted"),
+    labels = c(
+      "outcome" = "Outcome",
+      "intervention" = "Intervention",
+      "adjusted" = "Adjusted", 
+      "unadjusted" = "Unadjusted"),
+    name = "Node:"
+  ) +
+  scale_shape_manual(
+    values = c(
+      unobserved = 18, 
+      observed = 16
+      ),
+    labels = c(
+      "observed" = "Observed", 
+      "unobserved" = "Unobserved"),
+    name = "Variable:"
+  ) +
+  theme_void() +
+  theme(
+    legend.box = "vertical",  
+    legend.position = "bottom",
+    legend.title = element_text(
+      face = "italic"
+      )
+  )
+
+# create legend text plot
+legend_plot <- 
+  ggplot() + 
+  scale_x_continuous(
+    limits = c(0, 1)
+    ) +
+  scale_y_continuous(
+    limits = c(-1.2, 0.2)
+    ) +
+  annotate("text",
+    x = 0, 
+    y = 0,
+    hjust = 0,
+    label = "Key:",
+    fontface = "italic",
+    size = rel(4)
+    ) +
+  annotate("text",
+    x = 0, 
+    y = -0.25,
+    hjust = 0,
+    size = rel(2.5),
+    label = expression(paste(
+      Y[1], ": Use of SHS after age 18, ",
+      Y[2], ": Other (unobserved) outcomes, ",
+      D, ": Intervention (PYI), ",
+      M, ": Mediators",
+    ))
+  ) +
+  annotate("text",
+    x = 0, 
+    y = -0.5,
+    hjust = 0,
+    size = rel(2.5),
+    label = expression(paste(
+      X[1], ": 12 months or more in OOHC, ",
+      X[2], ": History of placement instability, ", 
+      X[3], ": In residential care placement during eligibility period, "
+    ))
+  ) +
+  annotate("text",
+    x = 0, 
+    y = -0.75,
+    hjust = 0,
+    size = rel(2.5),
+    label = expression(paste(
+      X[4], ": In permanent care placement during eligibility period, ",
+      Z[1], ": Factors that occured before or during OOHC, ",
+      Z[2], ": Parental responsibility of the Minister during eligibility period, "
+    )) 
+  ) +
+  annotate("text",
+    x = 0, 
+    y = -1,
+    hjust = 0,
+    size = rel(2.5),
+    label = expression(paste(
+      Z[3], ": In kinship care placement during eligibility period, ",
+      Z[4], ": Self-placed from placement after age 16, ",
+      Z[5], ": Use of SHS between age 16 and 18, ",
+      Z[6], ": Factors that occured before 18"
+    ))
+  ) +
+  theme_void()
+
+# bring together dag and legend
+plot_grid(
+  pyi_dag,
+  legend_plot,
+  ncol = 1,
+  rel_heights = c(0.85, 0.15)
+)
+```
+
+## Propensity Score Matching Specification
+
+We implemented propensity score matching using a series of iterative specifications to achieve covariate balance. Propensity scores were estimated using a generalised additive model (GAM) with a probit link function using the `MatchIt` package [@ho2011matchitnonparametricpreprocessing]. The model included both our minimal adjustment set $X_i$ derived from our DAG and four additional pre-treatment covariates $Z_i$ that improved balance without introducing bias.
+
+We applied two matching approaches: 1) 1:1 Nearest Neighbour, where each treated unit was matched to a single comparison unit with the closest propensity score, and 2) full matching, which optimally partitions the full sample into matched sets containing one treated unit and a variable number of weighted comparison units. In both specifications, matching was done without replacement and comparison units outside the region of common support were trimmed. No treated units were excluded. 
+
+## Treatment Effect Estimation
+
+Treatment effects were estimated for binary, count, and continuous outcomes using logistic, Poisson, and linear regression models respectively. Each model included the minimal adjustment set of covariates derived from our DAG $X_i$, as it has been shown to reduce dependence on the specification of the matching model, while potentially increasing precision and reducing bias from any residual imbalance [@ho2007matchingnonparametricpreprocessing]. We do not include the additional covariates $Z_i$ in our model since $X_i$ is sufficient for identification. 
+
+Our general regression model specification took the form:
+\begin{center}
+$g(E[Y_i]) = \beta_0 + \beta_1 D_i + X_i'\beta$
+\end{center}
+where $Y_i$ is the outcome for individual $i$, $D_i$ is the treatment indicator, $X_i$ is the vector of covariates representing our minimal adjustment set, and $g(.)$ is the appropriate link function (identity for continuous outcomes, log for count outcomes, and logit for binary outcomes).
+
+The ATT was estimated using *g*-computation [@snowden2011implementationgcomputationsimulated] using the `marginaleffects` package [@arel-bundock2024howinterpretstatistical]. Standard errors (SE) and confidence intervals (CI) were estimated using cluster-robust methods that account for dependence between matched sets [@abadie2022robustpostmatchinginference]. For non-linear models, where the delta method provides only approximate standard errors, we used a cluster bootstrap with 4,999 replications [@austin2014usebootstrappingwhen]. 
+
+### Treatment Effect Heterogeneity
+
+To test for treatment effect heterogeneity, we plotted individual treatment effect estimates against their propensity scores, following @rosenbaum1983centralrolepropensity. We examined these plots to see if the fitted lines for the treatment and comparison groups visibly differed across the range of the propensity score—an indication of treatment-effect heterogeneity—and thus reveal potential effect moderators.
+
+### Subgroup Analysis
+
+We estimated conditional average treatment effects (CATTs) for two pre-specified subgroups: Sex and Aboriginal and Torres Strait Islander status. Additionally, we conducted subgroup analyses for variables where the heterogeneity diagnostics suggested meaningful effect modification. All CATTs were estimated with the full sample using subgroup-treatment interaction terms. Given the small samples and rare outcomes, we used parsimonious specifications without additional covariates. For binary outcomes, we applied maximum penalised likelihood with powers of the Jeffreys prior as penalty to reduce bias using the `brglm2` package [@kosmidis2021jeffreyspriorpenaltyfiniteness].
+
+### Sensitivity Analysis
+
+We conducted sensitivity analyses for unmeasured confounding using the `tipr` package [@mcgowan2022tiprpackagesensitivity], examining how strong an unmeasured confounder would need to be to alter our conclusions about the binary outcomes. We constructed three scenarios (low, medium, high) where the potential unmeasured confounder-exposure relationship was calibrated based on the observed minimum and maximum prevalence differences of measured confounders in our unmatched sample.
+
+## Implementation Analysis
+
+### Data Collection
+
+We conducted focus groups and semi-structured interviews with multiple stakeholder groups to understand implementation from various perspectives between October 2019-August 2020. For PYI participants, we conducted 8 focus groups (n=36) with a convenience sample of participants aged 18 and over who were engaged with the program. For service providers, we conducted 8 focus groups and 6 interviews with representatives from PYI service and housing providers (n=42 participants). From the funder, we conducted interviews with representatives (n=15) from DCJ offices. All focus groups and interviews utilised semi-structured discussion guides informed by the Consolidated Framework for Implementation Research (CFIR) [@damschroder2009fosteringimplementationhealth]. 
+
+### Qualitative analysis framework
+
+We used a modified version of the CFIR framework to examine implementation barriers and facilitators at four critical junctures in the client journey: program entry, pre-leaving care, transition period, and independent living. This analysis followed an established process: 1) reviewing focus group and interview data for familiarisation, 2) applying both a priori codes derived from CFIR domains and emergent codes through open coding, 3) categorising codes into themes related to implementation barriers and facilitators, and 4) synthesising insights across provider and funder perspectives. We triangulated results across stakeholder groups and used data convergence - comparing datasets to determine alignment of conclusions [@palinkas2011mixedmethoddesigns]. Separately, we undertook a thematic analysis of participant focus group data to examine intervention acceptability by themes around relationship with workers, effectiveness of support, appropriateness of services, and relationships with others.
+
+# Results
+
+## Population characteristics
+
+Characteristics of individuals who received PYI (n=295) are summarised in @tbl-one. They were evenly distribution by sex (49.1% male, 50.9% female). Despite forming 7.6% of the NSW population aged 15-19 in 2021 [@abs2024estimatedresidentpopulation, @abs2023populationestimatesage], almost a third (32.9%) of participants were Aboriginal and Torres Strait Islander, this is consistent with their ongoing over representation in OOHC in Australia. Since we relied on administrative data to identify eligibility for the intervention over time, and we lack to detail for when an individual commenced the intervention, we looked at their characteristics during the period they were eligible for the intervention (aged between 16 years, 9 months to 17 years, 6 months) rather than a fixed "baseline". Among eligibility criteria for the intervention, which were not mutually exclusive, almost all had experienced placement instability or been in OOHC for twelve months or more. The mean duration of time in OOHC at the start of their eligibility period — 16 years, 9 months for most — was ~9 years. During the period at which they were eligible period, placements were distributed across residential care (20.7%), foster care (43.1%), and kinship care (31.2%). Notably, 30.85% of participants had experienced at least one spell in homelessness services between ages 16-18.
+
+```{r}
+#| label: tbl-one
+#| echo: false
+#| cache: true
+#| tbl-cap: Baseline characteristics of intervention group
+
+# Create the data frame
+table_one_data <- tibble(
+  Characteristic = c(
+    "Sample size (n)",
+    "Male",
+    "Female",
+    "Aboriginal or Torres Strait Islander",
+    "Non-Aboriginal or Torres Strait Islander",
+    "Residential care placement",
+    "Foster care placement",
+    "Kinship care placement",
+    "Permanent placement",
+    "Parental responsibility of the Minister",
+    "Twelve months or more in out-of-home care",
+    "History of out-of-home care placement instability",
+    "Months spent in care at point at which eligible for intervention",
+    "Placement breakdown",
+    "Placement ended due to disruptive behaviour",
+    "Self-placed, missing or absent from placement",
+    "Independent living placement",
+    "Spell in homelessness services"
+  ),
+  Value = c(
+    "295",
+    "145 (49.15)",
+    "150 (50.85)",
+    "97 (32.88)",
+    "198 (67.12)",
+    "61 (20.68)",
+    "127 (43.05)",
+    "92 (31.19)",
+    "218 (73.9)",
+    "287 (97.29)",
+    "292 (98.98)",
+    "292 (98.98)",
+    "107.36 (54.6)",
+    "65 (22.03)",
+    "107 (36.27)",
+    "54 (18.31)",
+    "59 (20)",
+    "91 (30.85)"
+  )
+)
+
+# Create the table
+table_one_data |>
+  tt(
+    notes = list(
+      a = list(i = c(6, 9, 11, 12), j = 1, text = "Eligibility criteria for intervention"),
+      b = list(i = c(2,3,4,5,6,7,8,9,10,11,12,14,15,16,17,18), j = 2, text = "N (\\%)"),
+      c = list(i = c(13), j = 2, text = "Mean (SD)"))
+  ) |>
+  # add table subheadings
+  group_tt(
+    i = list(
+      "Sex:" = 2,
+      "Aboriginal and Torres Strait Islander status:" = 4,
+      "Current placement type during eligible period:" = 6,
+      "Out-of-home care experience:" = 10,
+      "Events after age 16:" = 14
+    )
+  ) |>
+  # style table sub-headings
+  style_tt(
+    i = c(2,5,8,13,18),
+    j = 1, 
+    italic = TRUE,
+    color = "#000000"
+  ) |>
+  # change font size
+  style_tt(
+    fontsize = 0.9
+  )
+```
+
+## Matching results
+
+We evaluated multiple matching algorithms (nearest neighbour, full, optimal pair, and genetic matching) and propensity score estimation methods (generalised linear models, gradient boosting, random forests, and GAMs with various link functions). While nearest neighbour matching with a probit-link GAM achieved good balance for most covariates, one variable exceeded the conventional standardised mean difference (SMD) threshold of 0.1. Applying full matching to the same model improved balance across all covariates but reduced the effective sample size. The final specification yielded an Effective Sample Size (ESS) of 196.8—representing the equivalent number of equally weighted comparison units—compared to 295 in the nearest neighbour specification (see @tbl-matching-results). This highlights the bias-variance trade-off: nearest neighbour matching offers greater precision through a larger effective sample, whereas full matching minimises bias by improving covariate balance, albeit at the cost of increased variance. Given our primary goal was to reduce bias through optimal covariate balance, we selected full matching as our preferred specification. Balance diagnostics, including covariate balance and common support for both approaches, are presented in Figures 1 and 2 of the supplementary material.
+```{r}
+#| label: tbl-matching-results
+#| echo: false
+#| tbl-cap: Results from two selected matching specifications 
+
+# specify data
+matching_summary_data <- tibble(
+  Specification = c("Nearest Neighbour", "Full matching"),
+  "PYI sample" = c(295, 295),
+  "PYI matched" = c(295, 295),
+  "Sample" = c(422, 422),
+  "Matched" = c(295, 406),
+  "ESS" = c("-", "196.8"),
+  "Unmatched" = c(127, 0),
+  "Discarded" = c(0, 16)
+  ) 
+
+# create table
+matching_summary_data |> 
+  tt(
+    width = c(2.3, 0.9, 0.9, 0.8, 0.8, 0.7, 1.2, 1.2)
+  ) |> 
+  # add groups
+  group_tt(
+    j = list(
+      "Intervention" = 2:3,                                                                  
+      "Comparison" = 4:8)
+  ) |>
+  # change font size
+  style_tt(
+    fontsize = 0.9
+  )
+```
+## Effectiveness results
+
+### Overall results
+
+@tbl-att-results reports the ATT for each of the ten outcomes, under both full and nearest-neighbour matching specifications. As recommended by @westreich2013table2fallacy, we did not interpret (or report) the individual regression coefficients, which lack meaningful causal interpretation given our goal is to estimate the treatment effect.
+
+All outcomes represent negative events (e.g., entry into a SHS spell), therefore a negative ATT estimate favours PYI. However, the observed estimates typically centre near zero, with confidence intervals comfortably spanning no effect, suggesting that on average, PYI does not meaningfully shift the likelihood or magnitude of these outcomes relative to the comparison group. Given that these events occur in only approximately five percent of the sample, their rarity may hinder detection of small or subtle effects. Notably, the results are highly consistent across both matching specifications, reinforcing the conclusion that there is no large or systematic difference attributable to PYI. 
+
+Results are presented in multiple formats—for both full and nearest neighbour specifications in Tables 3 and 4 of the supplementary material-to facilitate interpretation and synthesis. For binary outcomes, we report risk differences (RD), relative risks (RR), and odds ratios (OR), with the RR and OR being exponentiated versions of contrasts computed on the log and logit scales respectively. For count outcomes, we present both the raw mean difference and its standardised form (Cohen's *d*). For continuous outcomes, we report mean differences in the natural units as well as Cohen's *d*. We have opted to provide this range of effect measures as a) it allows readers to interpret results in their preferred metric, and b) it may support including this study in future meta-analyses work. In @fig-pyi-smd, we present a complete summary of our results, including both matching specifications and all or our subgroup analyses, with results visualised using Cohen's *d* to place them on a common scale.
+
+```{r}
+#| label: tbl-att-results
+#| echo: false
+#| tbl-cap: ATT results for both matching specifications 
+
+# read data for nearest neighbour specification
+att_results_file_location <- "../manuscript/inputs/data/combined_att_results.csv"
+att_results <- read_csv(
+  att_results_file_location,
+  show_col_types = FALSE)
+
+# subset for full results
+full_att_results <- att_results |>
+  select(
+    metrics,
+    ends_with("_full_match")
+  ) |>
+  filter(
+    row_number() %in% c(4,5,8,9,10,20,21,22)  
+  ) |>
+  # distinguish between reported stats
+  mutate(
+    stat_type = case_when(
+      metrics %in% c("ATT estimate", "Standard error", "95% CI") & row_number() <= 5 ~ "risk_diff_",
+      metrics %in% c("ATT estimate", "Standard error", "95% CI") & row_number() > 5 ~ "mean_diff_",
+      TRUE ~ ""  
+    ),
+    # create unique column names
+    metrics = case_when(
+      stat_type != "" ~ paste0(stat_type, metrics),
+      TRUE ~ metrics
+    )
+  ) |>
+  # drop faff
+  select(
+    -stat_type
+  ) |>
+  # pivot to long format
+  pivot_longer(
+    cols = ends_with("_full_match"),
+    names_to = "outcome",
+    values_to = "value"
+  ) |>
+  # clean up outcome suffix
+  mutate(
+    outcome = str_remove(outcome, "_full_match$")
+  ) |>
+  # pivot wider to get metrics as columns
+  pivot_wider(
+    names_from = metrics,
+    values_from = value
+  ) |>
+  # combine columns of different stats
+  mutate(
+    ATT = coalesce(`risk_diff_ATT estimate`, `mean_diff_ATT estimate`),
+    SE = coalesce(`risk_diff_Standard error`, `mean_diff_Standard error`),
+    `95\\% CI` = coalesce(`risk_diff_95% CI`, `mean_diff_95% CI`)
+  ) |>
+  # rename outcomes
+  mutate(
+    Outcome = case_when(
+      outcome == "in_housing_spell_on_date_18" ~ "In SHS spell on 18th birthday",                                  
+      outcome == "in_housing_spell_on_date_19" ~ "In SHS spell on 19th birthday",                                
+      outcome == "new_housing_spell_between_18_19" ~ "New SHS spell between 18th \\& 19th birthday",                             
+      outcome == "any_housing_spell_between_18_19" ~ "New or ongoing SHS spell between 18th \\& 19th birthday",                            
+      outcome == "new_unsheltered_homelessness_between_18_19" ~ "New unsheltered homelessness episode between 18th \\& 19th birthday",                  
+      outcome == "new_ongoing_unsheltered_homelessness_between_18_19" ~ "New or ongoing unsheltered homelessness episode between 18th and 19th birthday",         
+      outcome == "new_short_term_accommodation_required_between_18_19" ~ "In new SHS spell that requires short term accommodation between 18th \\& 19th birthday",         
+      outcome == "new_ongoing_short_term_accommodation_required_between_18_19" ~ "In new or ongoing SHS spell that requires short term accommodation between 18th \\& 19th birthday",
+      outcome == "count_total_spells_18_19" ~ "Number of distinct SHS spells between 18th \\& 19th birthday",                                   
+      outcome == "time_in_housing_support_18_19" ~ "Days in SHS spell between 18th \\& 19th birthday")
+  ) |>
+  # keep what we need
+  select(
+    Outcome, 
+    `Intervention group`, 
+    `Comparison group`, 
+    ATT, 
+    SE, 
+    `95\\% CI`)
+
+# subset for nn results
+nn_att_results <- att_results |>
+  select(
+    metrics,
+    ends_with("_nn_match")
+  ) |>
+  filter(
+    row_number() %in% c(4,5,8,9,10,20,21,22)  
+  ) |>
+  # distinguish between reported stats
+  mutate(
+    stat_type = case_when(
+      metrics %in% c("ATT estimate", "Standard error", "95% CI") & row_number() <= 5 ~ "risk_diff_",
+      metrics %in% c("ATT estimate", "Standard error", "95% CI") & row_number() > 5 ~ "mean_diff_",
+      TRUE ~ ""  
+    ),
+  # create unique column names
+    metrics = case_when(
+      stat_type != "" ~ paste0(stat_type, metrics),
+      TRUE ~ metrics
+    )
+  ) |>
+  # drop faff
+  select(
+    -stat_type
+  ) |>
+  # pivot to long format
+  pivot_longer(
+    cols = ends_with("_nn_match"),
+    names_to = "outcome",
+    values_to = "value"
+  ) |>
+  # clean up outcome suffix
+  mutate(
+    outcome = str_remove(outcome, "_nn_match$")
+  ) |>
+  # pivot wider to get metrics as columns
+  pivot_wider(
+    names_from = metrics,
+    values_from = value
+  ) |>
+  # combine columns of different stats
+  mutate(
+    ATT = coalesce(`risk_diff_ATT estimate`, `mean_diff_ATT estimate`),
+    SE = coalesce(`risk_diff_Standard error`, `mean_diff_Standard error`),
+    `95\\% CI` = coalesce(`risk_diff_95% CI`, `mean_diff_95% CI`)
+  ) |>
+  # rename outcomes
+  mutate(
+    Outcome = case_when(
+      outcome == "in_housing_spell_on_date_18" ~ "In SHS spell on 18th birthday",                                  
+      outcome == "in_housing_spell_on_date_19" ~ "In SHS spell on 19th birthday",                                
+      outcome == "new_housing_spell_between_18_19" ~ "New SHS spell between 18th \\& 19th birthday",                             
+      outcome == "any_housing_spell_between_18_19" ~ "New or ongoing SHS spell between 18th \\& 19th birthday",                            
+      outcome == "new_unsheltered_homelessness_between_18_19" ~ "New unsheltered homelessness episode between 18th \\& 19th birthday",                  
+      outcome == "new_ongoing_unsheltered_homelessness_between_18_19" ~ "New or ongoing unsheltered homelessness episode between 18th and 19th birthday",         
+      outcome == "new_short_term_accommodation_required_between_18_19" ~ "In new SHS spell that requires short term accommodation between 18th \\& 19th birthday",         
+      outcome == "new_ongoing_short_term_accommodation_required_between_18_19" ~ "In new or ongoing SHS spell that requires short term accommodation between 18th \\& 19th birthday",
+      outcome == "count_total_spells_18_19" ~ "Number of distinct SHS spells between 18th \\& 19th birthday",                                   
+      outcome == "time_in_housing_support_18_19" ~ "Days in SHS spell between 18th \\& 19th birthday")
+  ) |>
+  # keep what we need
+  select(
+    Outcome, 
+    `Intervention group`, 
+    `Comparison group`, 
+    ATT, 
+    SE, 
+    `95\\% CI`)
+
+# bind results
+att_table_data <- bind_rows(
+  full_att_results,
+  nn_att_results  
+)
+
+# create table
+att_table_data |> 
+  tt(
+    width = c(10, 1.5, 1.5, 1, 1, 2.5),
+    notes = list(
+      a = list(i = c(1, 2, 3, 4, 5, 6, 7, 8, 11, 12, 13, 14, 15, 16, 17, 18), j = 1, text = "For binary outcomes, potential outcomes represent the estimated predicted probability of experiencing the outcome in each group (ranging from 0 to 1). The ATT represents the difference in these probabilities between groups (risk difference)."),
+      b = list(i = c(9, 10, 19, 20), j = 1, text = "For continuous and count outcomes, potential outcomes represent the estimated mean value in each group. The ATT represents the mean difference between groups."))
+  ) |> 
+  # add groups
+  group_tt(
+    j = list(
+      "Estimated Potential Outcomes" = 2:3,                                                                  
+      "Treatment Effect" = 4:6)
+  ) |>
+  # add table subheadings
+  group_tt(
+    i = list(
+      "Full matching:" = 1,
+      "Nearest Neighbour matching:" = 11
+    )
+  ) |>
+  # change font size
+  style_tt(
+      fontsize = 0.8
+  ) |>
+  # style table sub-headings
+  style_tt(
+    i = c(1,12),
+    j = 1, 
+    italic = TRUE,
+    color = "#000000"
+  )
+```
+
+```{r}
+#| label: fig-pyi-smd
+#| echo: false
+#| cache: false
+#| fig-cap: Treatment effect results for overall (ATT) and subgroup analysis (CATT) presented as SMD for both matching specifications
+#| fig-height: 8
+#| fig-width: 6
+
+# load data
+smd_plot_file_location <- "../manuscript/inputs/data/smd_plot_data.RDS"
+smd_plot_data <- readRDS(smd_plot_file_location)
+
+# declare plotting helper function to make gradient geom_rect annotations
+annotate_gradient_rects <- function(n_rects, x_min, x_max, fill_color, 
+                                    alpha_max = 0.2, alpha_min = 0.05,
+                                    n_steps = 2, alpha_pattern = "center") {
+  x_steps <- seq(from = x_min, to = x_max, length.out = n_rects + 1)
+  
+  # create alpha steps based on the specified pattern
+  if (alpha_pattern == "center") {
+    alpha_steps <- c(
+      seq(from = alpha_max, to = alpha_min, length.out = n_steps),
+      seq(from = alpha_min, to = alpha_max, length.out = n_steps)
+    )
+  } else if (alpha_pattern == "right") {  # changed from 'top'
+    alpha_steps <- seq(from = alpha_max, to = alpha_min, length.out = n_steps * 2)
+  } else if (alpha_pattern == "left") {   # changed from 'bottom'
+    alpha_steps <- seq(from = alpha_min, to = alpha_max, length.out = n_steps * 2)
+  } else {
+    stop("Invalid alpha_pattern. Choose 'center', 'right', or 'left'.")
+  }
+  
+  # repeat the alpha steps to match the number of rectangles
+  alpha_steps <- rep(alpha_steps, length.out = n_rects)
+  
+  rect_grad <- data.frame(
+    xmin = x_steps[-(n_rects + 1)],
+    xmax = x_steps[-1],
+    alpha = alpha_steps
+  )
+  
+  lapply(1:nrow(rect_grad), function(i) {
+    annotate("rect", 
+             xmin = rect_grad$xmin[i], xmax = rect_grad$xmax[i], 
+             ymin = -Inf, ymax = Inf,
+             fill = fill_color, alpha = rect_grad$alpha[i])
+  })
+}
+
+# subset data
+smd_plot_data_filtered <- smd_plot_data |>
+  filter(
+    !outcome == "In new homelessness spell that requires housing assistance between 18th & 19th birthday",
+    !outcome == "In new or ongoing homelessness spell that requires housing assistance between 18th & 19th birthday"
+  )
+
+# subset data for top panel
+top_panel_smd_facet_plot_data <- smd_plot_data_filtered |>
+  mutate(
+    group = case_when(
+      group == "Overall" ~ "ATT",
+      group == "Sex" ~ "CATT(Sex)",
+      group == "Aboriginal" ~ "CATT(Aboriginal Status)",
+      group == "Housing vulnerability" ~ "CATT(Prior homelessness)",
+    ),
+    group = factor(
+      group, 
+      levels = c(
+        "ATT", 
+        "CATT(Sex)", 
+        "CATT(Aboriginal Status)", 
+        "CATT(Prior homelessness)"
+      ),
+      ordered = TRUE
+    ),
+    matching_specification = case_when(
+      matching_specification == "Full" ~ "Full matching",
+      matching_specification == "Nearest Neighbour" ~ "Nearest Neighbour matching"
+    )
+  ) |>
+  filter(
+    outcome %in% c(
+      "In homelessness spell on 18th birthday",                                                                  
+      "In homelessness spell on 19th birthday",                                                                   
+      "Any homelessness spell between 18th & 19th birthday",
+      "New homelessness spell between 18th & 19th birthday",
+      "Days in homelessness spell between 18th and 19th birthday")
+  ) |>
+  mutate(
+    outcome = case_when(
+      outcome == "Any homelessness spell between 18th & 19th birthday" ~ "New or ongoing homelessness spell between 18th & 19th birthday",
+      TRUE ~ outcome
+    ),
+    outcome = factor(
+      outcome,
+      levels = c(
+        "In homelessness spell on 18th birthday",                                                                  
+        "In homelessness spell on 19th birthday",                                                                   
+        "New or ongoing homelessness spell between 18th & 19th birthday",
+        "New homelessness spell between 18th & 19th birthday",
+        "Days in homelessness spell between 18th and 19th birthday"
+      ),
+      ordered = TRUE
+    )
+  )
+
+# subset data for bottom panel
+bottom_panel_smd_facet_plot_data <- smd_plot_data_filtered |>
+  mutate(
+    group = case_when(
+      group == "Overall" ~ "ATT",
+      group == "Sex" ~ "CATT(Sex)",
+      group == "Aboriginal" ~ "CATT(Aboriginal Status)",
+      group == "Housing vulnerability" ~ "CATT(Prior homelessness)",
+    ),
+    group = factor(
+      group, 
+      levels = c(
+        "ATT", 
+        "CATT(Sex)", 
+        "CATT(Aboriginal Status)", 
+        "CATT(Prior homelessness)"
+      ),
+      ordered = TRUE
+    ),
+    matching_specification = case_when(
+      matching_specification == "Full" ~ "Full matching",
+      matching_specification == "Nearest Neighbour" ~ "Nearest Neighbour matching"
+    )
+  ) |>
+  filter(
+    outcome %in% c(
+      "New unsheltered homelessness spell between 18th and 19th birthday",
+      "New or ongoing unsheltered homelessness spell between 18th and 19th birthday",
+      "In new homelessness spell that requires short term accommodation between 18th & 19th birthday",           
+      "In new or ongoing homelessness spell that requires short term accommodation between 18th & 19th birthday",
+      "Number of distinct homelessness spells between 18th and 19th birthday")
+  ) |>
+  mutate(
+    outcome = factor(
+      outcome,
+      levels = c(
+        "New unsheltered homelessness spell between 18th and 19th birthday",
+        "New or ongoing unsheltered homelessness spell between 18th and 19th birthday",
+        "In new homelessness spell that requires short term accommodation between 18th & 19th birthday",           
+        "In new or ongoing homelessness spell that requires short term accommodation between 18th & 19th birthday",
+        "Number of distinct homelessness spells between 18th and 19th birthday"
+      ),
+      ordered = TRUE
+    )
+  )
+
+smd_plot_top_panel <- top_panel_smd_facet_plot_data |>  
+  ggplot() +
+  aes(
+    x = smd,
+    y = strata,
+    colour = matching_specification
+  ) +
+  annotate_gradient_rects(
+    n_rects = 50, 
+    x_min = 0,
+    x_max = 1,
+    fill_color = "#8B0000",
+    alpha_min = 0,  
+    alpha_max = 0.5,  
+    n_steps = 50,  
+    alpha_pattern = "left"
+  ) +
+  annotate_gradient_rects(
+    n_rects = 50, 
+    x_min = 0,
+    x_max = -1,
+    fill_color = "#006400",
+    alpha_min = 0,  
+    alpha_max = 0.5,  
+    n_steps = 50,  
+    alpha_pattern = "left"
+  ) +
+  geom_vline(
+    xintercept = 0,
+    colour = "gray50",
+    linetype = 2,
+    size = 0.3
+  ) +
+  geom_point(
+    data = top_panel_smd_facet_plot_data |> filter(matching_specification == "Full matching"),
+    size = 1,
+    position = position_nudge(y = 0.2)
+  ) +
+  geom_point(
+    data = top_panel_smd_facet_plot_data |> filter(matching_specification == "Nearest Neighbour matching"),
+    size = 1,
+    position = position_nudge(y = -0.2)
+  ) +
+  geom_errorbarh(
+    data = top_panel_smd_facet_plot_data |> filter(matching_specification == "Full matching"),
+    position = position_nudge(y = 0.2),
+    aes(
+      xmin = pmax(-1, ci_low),
+      xmax = pmin(1, ci_high),
+      height = 0),
+    linewidth = 0.25
+  ) +
+  geom_errorbarh(
+    data = top_panel_smd_facet_plot_data |> filter(matching_specification == "Nearest Neighbour matching"),
+    position = position_nudge(y = -0.2),
+    aes(
+      xmin = pmax(-1, ci_low),
+      xmax = pmin(1, ci_high),
+      height = 0),
+    linewidth = 0.25
+  ) +
+  geom_segment(
+    data = top_panel_smd_facet_plot_data |> filter(ci_low < -1 | ci_high > 1, matching_specification == "Full matching"),
+    position = position_nudge(y = 0.2),
+    aes(
+      x = case_when(
+        ci_low < -1 ~ -0.9,
+        ci_high > 1 ~ 0.9
+      ),
+      xend = case_when(
+        ci_low < -1 ~ -1,
+        ci_high > 1 ~ 1
+      ),
+      y = strata,
+      yend = strata),
+    arrow = arrow(
+      length = unit(0.125, "cm")),
+    linewidth = 0.25
+  ) +
+  geom_segment(
+    data = top_panel_smd_facet_plot_data |> filter(ci_low < -1 | ci_high > 1, matching_specification == "Nearest Neighbour matching"),
+    position = position_nudge(y = -0.2),
+    aes(
+      x = case_when(
+        ci_low < -1 ~ -0.9,
+        ci_high > 1 ~ 0.9
+      ),
+      xend = case_when(
+        ci_low < -1 ~ -1,
+        ci_high > 1 ~ 1
+      ),
+      y = strata,
+      yend = strata),
+    arrow = arrow(
+      length = unit(0.125, "cm")),
+    linewidth = 0.25
+  ) +
+  facet_grid(
+    group ~ outcome,
+    scales = "free",
+    space = "free",
+    labeller = labeller(
+      outcome = label_wrap_gen(width = 20),
+      group = label_wrap_gen(width = 10)
+    )
+  ) +
+  coord_cartesian(
+    xlim = c(-1,1)
+  ) +
+  scale_x_continuous(
+    breaks = c(-1, 0, 1)
+  ) +
+  scale_y_discrete(
+    labels = scales::label_wrap(10)
+  ) +
+  scale_color_manual(
+    values = c(
+      "Full matching" = "#005377",
+      "Nearest Neighbour matching" = "#06A77D"
+    )
+  ) +
+  labs(
+    x = "",
+    y = "",
+    caption = "",
+    colour = "Matching specification"
+  ) +
+  theme(
+    axis.ticks = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.grid.major = element_blank(),
+    strip.background = element_blank(),
+    legend.position = "bottom",
+    strip.text.x = element_text(
+      size = rel(0.7),
+      colour = "#000000"
+    ),
+    strip.text.y = element_text(
+      size = rel(0.7),
+      colour = "#000000",
+      face = "italic"
+    ),
+    axis.text.y = element_text(
+      size = rel(0.7),
+      colour = "#000000",
+      family = "roboto"
+    ),
+    axis.text.x = element_text(
+      size = rel(0.7),
+      colour = "#000000",
+      family = "roboto"
+    ),
+    axis.title.x = element_text(
+      size = rel(0.7),
+      colour = "#000000",
+      family = "roboto"
+    ),
+    axis.title = element_text(
+      size = rel(0.8),
+      colour = "#000000",
+      family = "roboto"
+    ),
+    panel.background = element_rect(
+      fill = "#FFFFFF"
+      ),
+    legend.title = element_text(
+      size = rel(0.7),
+      colour = "#000000",
+      family = "roboto"
+    ),
+    legend.text = element_text(
+      size = rel(0.6),
+      colour = "#000000",
+      family = "roboto"
+    ),
+    legend.margin = margin(
+      t = 0, 
+      b = 0,
+      unit = "pt"),
+    plot.margin = margin(
+      l = 0, 
+      r = 0, 
+      t = 0, 
+      b = 0, 
+      unit = "pt")
+  )
+
+smd_plot_bottom_panel <- bottom_panel_smd_facet_plot_data |>  
+  ggplot() +
+  aes(
+    x = smd,
+    y = strata,
+    colour = matching_specification
+  ) +
+  annotate_gradient_rects(
+    n_rects = 50, 
+    x_min = 0,
+    x_max = 1,
+    fill_color = "#8B0000",
+    alpha_min = 0,  
+    alpha_max = 0.5,  
+    n_steps = 50,  
+    alpha_pattern = "left"
+  ) +
+  annotate_gradient_rects(
+    n_rects = 50, 
+    x_min = 0,
+    x_max = -1,
+    fill_color = "#006400",
+    alpha_min = 0,  
+    alpha_max = 0.5,  
+    n_steps = 50,  
+    alpha_pattern = "left"
+  ) +
+  geom_vline(
+    xintercept = 0,
+    colour = "gray50",
+    linetype = 2,
+    size = 0.3
+  ) +
+  geom_point(
+    data = bottom_panel_smd_facet_plot_data |> filter(matching_specification == "Full matching"),
+    size = 1,
+    position = position_nudge(y = 0.2)
+  ) +
+  geom_point(
+    data = bottom_panel_smd_facet_plot_data |> filter(matching_specification == "Nearest Neighbour matching"),
+    size = 1,
+    position = position_nudge(y = -0.2)
+  ) +
+  geom_errorbarh(
+    data = bottom_panel_smd_facet_plot_data |> filter(matching_specification == "Full matching"),
+    position = position_nudge(y = 0.2),
+    aes(
+      xmin = pmax(-1, ci_low),
+      xmax = pmin(1, ci_high),
+      height = 0),
+    linewidth = 0.25
+  ) +
+  geom_errorbarh(
+    data = bottom_panel_smd_facet_plot_data |> filter(matching_specification == "Nearest Neighbour matching"),
+    position = position_nudge(y = -0.2),
+    aes(
+      xmin = pmax(-1, ci_low),
+      xmax = pmin(1, ci_high),
+      height = 0),
+    linewidth = 0.25
+  ) +
+  geom_segment(
+    data = bottom_panel_smd_facet_plot_data |> filter(ci_low < -1 | ci_high > 1, matching_specification == "Full matching"),
+    position = position_nudge(y = 0.2),
+    aes(
+      x = case_when(
+        ci_low < -1 ~ -0.9,
+        ci_high > 1 ~ 0.9
+      ),
+      xend = case_when(
+        ci_low < -1 ~ -1,
+        ci_high > 1 ~ 1
+      ),
+      y = strata,
+      yend = strata),
+    arrow = arrow(
+      length = unit(0.15, "cm")),
+    linewidth = 0.25
+  ) +
+  geom_segment(
+    data = bottom_panel_smd_facet_plot_data |> filter(ci_low < -1 | ci_high > 1, matching_specification == "Nearest Neighbour matching"),
+    position = position_nudge(y = -0.2),
+    aes(
+      x = case_when(
+        ci_low < -1 ~ -0.9,
+        ci_high > 1 ~ 0.9
+      ),
+      xend = case_when(
+        ci_low < -1 ~ -1,
+        ci_high > 1 ~ 1
+      ),
+      y = strata,
+      yend = strata),
+    arrow = arrow(
+      length = unit(0.15, "cm")),
+    linewidth = 0.25
+  ) +
+  facet_grid(
+    group ~ outcome,
+    scales = "free",
+    space = "free",
+    labeller = labeller(
+      outcome = label_wrap_gen(width = 20),
+      group = label_wrap_gen(width = 10)
+    )
+  ) +
+  coord_cartesian(
+    xlim = c(-1,1)
+  ) +
+  scale_x_continuous(
+    breaks = c(-1, 0, 1)
+  ) +
+  scale_y_discrete(
+    labels = scales::label_wrap(10)
+  ) +
+  scale_color_manual(
+    values = c(
+      "Full matching" = "#005377",
+      "Nearest Neighbour matching" = "#06A77D"
+    )
+  ) +
+  labs(
+    x = "Standardised Mean Difference",
+    y = "",
+    caption = "Error bars denote 95% confidence intervals",
+    colour = ""
+  ) +
+  theme(
+    axis.ticks = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.grid.major = element_blank(),
+    strip.background = element_blank(),
+    legend.position = "none",
+    strip.text.x = element_text(
+      size = rel(0.7),
+      colour = "#000000"
+    ),
+    strip.text.y = element_text(
+      size = rel(0.7),
+      colour = "#000000",
+      face = "italic"
+    ),
+    axis.text.y = element_text(
+      size = rel(0.7),
+      colour = "#000000",
+      family = "roboto"
+    ),
+    axis.text.x = element_text(
+      size = rel(0.7),
+      colour = "#000000",
+      family = "roboto"
+    ),
+    axis.title.x = element_text(
+      size = rel(0.7),
+      colour = "#000000",
+      family = "roboto"
+    ),
+    plot.caption = element_text(
+      size = rel(0.6),
+      colour = "#000000",
+      family = "roboto"
+    ),
+    panel.background = element_rect(
+      fill = "#FFFFFF"
+      ),
+    legend.margin = margin(
+      t = 0, 
+      b = 0,
+      unit = "pt"),
+    plot.margin = margin(
+      l = 0, 
+      r = 0, 
+      t = 0, 
+      b = 0, 
+      unit = "pt")
+  )
+
+# combine both plots together using cowplot
+combined_smd_summary_plot <- plot_grid(
+  smd_plot_top_panel, 
+  smd_plot_bottom_panel, 
+  ncol = 1,
+  align = 'v',
+  axis = 'lr',
+  rel_heights = c(1, 1)
+)
+
+# add annotations
+annotated_smd_summary_plot <- ggdraw() + 
+  draw_plot(
+    combined_smd_summary_plot
+    ) +
+  draw_text(
+    "Favours intervention",
+    x = 0.225,
+    y = 0.52,
+    size = 8,
+    family = "roboto",
+    fontface = "bold",
+    color = "#006400"
+  ) +
+  draw_line(
+    x = c(0.275, 0.15),  
+    y = c(0.505, 0.505),  
+    color = "#006400",
+    size = 0.5,
+    arrow = arrow(length = unit(0.2, "cm"))
+  ) +
+  draw_text(
+    "Favours comparison",
+    x = 0.85,
+    y = 0.52,
+    size = 8,
+    family = "roboto",
+    fontface = "bold",
+    color = "#8B0000"
+  ) +
+  draw_line(
+    x = c(0.8, 0.925),  
+    y = c(0.505, 0.505),  
+    color = "#8B0000",
+    size = 0.5,
+    arrow = arrow(length = unit(0.2, "cm"))
+  )
+annotated_smd_summary_plot
+```
+
+#### Treatment Effect Heterogenity
+
+We tested for treatment-effect heterogeneity in the ATT model and in six additional conditional ATT analyses stratified by binary variables included in the matching model (Figures 3–12 in the supplementary material). Across all ten outcomes, heterogeneity emerged specifically for individuals who had been homeless between ages 16 and 18 (hereafter 'housing vulnerability'). The effect was more pronounced under full matching but remained evident, though to a lesser degree, under the nearest‐neighbour specification. These findings suggest that housing vulnerability is a potential moderator, warranting further examination through subgroup analysis.
+
+### Subgroup Analyses
+
+Subgroup analysis was undertaken to estimate the conditional ATT (CATT) on being male, Aboriginal or Torres Strait Islander or housing vulnerability. No difference was detected for the existence of moderation by sex (see Tables 5 and 6 in the supplementary material) for results for both specifications.  
+
+We found that Aboriginal status moderates the treatment effect in four of the ten examined outcomes in our full matching specification. For in SHS on 18th birthday, Aboriginal participants experienced an increased risk (CATT: 0.068, 95% CI: [0.024, 0.126]), while non-Aboriginal participants experienced a decrease (CATT: -0.057, 95% CI: [-0.126, -0.012]). The difference in risk differences -0.125 (95% CI: [-0.201, -0.049], p = 0.001) provides some evidence of a negative moderation effect. Similar patterns were observed for new or ongoing SHS spell between 18th and 19th birthday (-0.164, 95% CI: [-0.308, -0.020], p = 0.026), new or ongoing SHS spell requiring short-term accommodation (-0.164, 95% CI: [-0.308, -0.020], p = 0.026), and days in SHS spell between 18th and 19th birthday (-29.651, [-49.273, -10.029], p = 0.003). In each of these cases, Aboriginal participants experienced less favourable treatment effects compared to their non-Aboriginal counterparts. Results from the Nearest Neighbour specification corroborated these results and identified similar moderation patterns in two additional outcomes. Full results are included in Tables 7 and 8 in the supplementary material.
+
+In contrast to the consistent moderation findings for Aboriginal participants, our results for housing vulnerability varied by matching specification. The full matching estimates pointed in the same direction as the nearest neighbour estimates (see @fig-pyi-smd) but were subject to wider confidence intervals that encompassed the null, thereby preventing firm conclusions about moderation. In other words, the data remain compatible with the possibility of a moderation effect, even if the full matching results do not detect it at conventional levels of statistical significance. It is plausible that the relatively small number of PYI participants with prior homelessness (n=91) contributed to the imprecision of these estimates, thereby limiting our power to definitively detect it. Consequently, while the nearest neighbour results suggest potential heterogeneity in treatment effects by housing vulnerability, we cannot rule out similar patterns in the full matching specification. The full set of subgroup estimates, along with their standard errors and confidence intervals, are provided in Tables 9 and 10 in the supplementary material.
+
+### Sensitivity Analyses
+
+We conducted sensitivity analyses for unmeasured confounding on binary outcomes using tipping point analysis. Since we did not detect any precise ATT estimates, the results of this analysis indicate the strength of confounder-outcome relationships that would be required to flip the sign of our point estimates under different scenarios (see supplementary material, Table 11). For binary outcomes assessed under full matching, an unmeasured confounder would need to have a relationship with the outcome between 0.3-1.0 times that of the treatment-outcome relationship to reverse the direction of the observed effect. The required relationships are substantially larger for nearest neighbour specifications, ranging from 1.3-2.9 times the treatment-outcome relationship. 
+
+## Implementation results
+
+### Intervention acceptability
+
+Intervention acceptability - defined as the perception among stakeholders that an intervention is agreeable, palatable, or satisfactory [@proctor2011outcomesimplementationresearch] - was examined through focus groups with participants. Thematic analysis revealed that participants' perceptions of acceptability were largely shaped by four interconnected domains: relationships with workers, effectiveness of support, appropriateness of services, and peer relationships. Firstly, participants often highlighted the importance of strong, trusting connections with frontline staff. Many felt that workers’ empathy, consistency, and willingness to listen were central to the program’s overall value, particularly during critical junctures like entry into the program and preparation for leaving care. Secondly, views on the program’s effectiveness centered on whether the support provided aligned with participants’ self-identified needs. While some described the assistance as timely and well-tailored—particularly around housing navigation and life skills—others expressed a desire for broader or more intensive resources in areas such as mental health and longer-term stability. Thirdly, participants commented on the appropriateness of services, noting that a flexible, person-centered approach helped them feel respected and acknowledged. At the same time, some participants wanted clearer communication about eligibility, referrals, and ongoing support options, underscoring the need for transparent and consistent processes. Lastly, participants’ interactions with one another were seen as an influential factor. Positive peer relationships often reinforced feelings of shared experience and mutual support, while interpersonal tensions could sometimes complicate group settings.
+
+### Barriers and Facilitators
+
+Implementation barriers and facilitators were thematically explored around four time points, reflecting a clients experience of the intervention: a) engaging with PYI; b) in PYI and before they left OOHC; c) as they transitioned from OOHC; and d) living independently in the community. Notably, providers required 12-18 months to codify and deliver services they perceived to be effective, highlighting the substantial time investment needed to achieve stable program delivery.
+
+Several barriers were identified during engagement with PYI. Firstly, as a pilot program, PYI and its providers were unfamiliar to many OOHC caseworkers, leading to inconsistent engagement and delays in connecting eligible youth to services. Secondly, while young people with significant disabilities that prevented them from living independently were ineligible for PYI, this information was not captured in administrative data, requiring time-consuming manual screening by PYI providers. Finally, the closed referral pathway and the initial evaluation design (RCT) initially created some suspicion at multiple levels of the OOHC system in sites here PYI was provided. However, the structured eligibility criteria and use of administrative data to identify eligible young people was also identified as facilitating the identification of at-risk youth---particularly those who self-placed--- who might have been overlooked through standard referral channels.
+
+While young people were still in OOHC, the major barrier faced by PYI providers was that many clients lacked basic aftercare preparation like leaving care plans, identification documents, and access to financial services — despite statutory requirements for this to occur. This required PYI staff to divert time and resources toward securing these basic entitlements rather than focusing on goal-setting and attainment. Providers felt that engaging with care leavers at an earlier age provided them with more time to build relationships and advocate for aftercare support.  
+
+As they transitioned from OOHC, several structural barriers impacted service delivery. Limited employment opportunities and appropriate housing stock in regional areas made it difficult to support care leavers to find either employment or housing. PYI's emphasis on private rental market placements created implementation challenges, as providers felt that this option wasn't suitable for all participants. While accommodation was available through PYI, providers reported underutilisation of allocated housing slots despite perceived scarcity, suggesting a misalignment between program design and local implementation contexts. Implementation facilitators emerged through providers' adaptive responses. Success in housing placement was achieved through developing relationships with real estate agents and property owners. Providers enhanced service integration by connecting participants with complementary supports through vocational educational institutions that structured the delivery of practical skill-building activities, particularly around budgeting and tenancy management. 
+
+After young people left care the reliance on private rental markets continued to be a barrier, where limited affordable housing stock constrained providers' placement options. While shared housing was utilised to address this barrier, implementation success varied significantly based on whether participants had choice in these arrangements. Service delivery was further complicated by property management issues, particularly around visitor-related damages, which strained provider relationships with real estate agents. The absence of clear operational definitions for "program success" created implementation uncertainty, affecting both service boundaries and exit planning. Implementation facilitators centred on sustained worker engagement and ongoing flexible support. Providers identified that young people required approximately 12 months post-care to develop adequate support networks, highlighting the importance of maintaining ongoing contact during this period.
+
+# Discussion
+
+## Key results
+
+On average, the PYI intervention does not meaningfully alter the likelihood or magnitude of homelessness-related outcomes for care leavers between their 18th and 19th birthdays. Across ten outcomes point estimates were near zero, and confidence intervals comfortably encompassed no effect. The rarity of these events likely limited power to detect smaller effects, yet the consistency of findings under both full and nearest‐neighbour matching reinforces the absence of any large or systematic impact. While this suggests that PYI may not dramatically shift short-term housing trajectories, it does not categorically exclude more nuanced or longer-run effects.
+
+Evidence of treatment-effect heterogeneity emerged in two critical areas. First, we observed that PYI’s impact may differ for those with a history of homelessness between ages 16 and 18 (i.e., housing vulnerability). Under nearest-neighbour matching, these individuals appeared to benefit more from PYI more compared to their peers without such histories, although the confidence intervals for the full matching specification crossed the null, signaling that we cannot we confident about this result. Second, Aboriginal participants exhibited a consistently less favourable response to PYI in multiple outcomes relative to non-Aboriginal participants. This pattern was evident under both matching approaches and persisted across several outcomes.
+
+From an implementation standpoint, thematic analysis highlights broad acceptability of the intervention among stakeholders, driven chiefly by strong worker-participant relationships, perceived effectiveness of support, appropriate service alignment with participants’ needs, and the potential for peer relationships to bolster mutual support. However, program implementation encountered substantial barriers across four key phases of engagement: from initial referral through to the transition out of out-of-home care and into independent living. Poor aftercare planning and limited housing options—particularly within private rental markets—were recurrent challenges that providers sought to mitigate. Facilitators included the use of eligibility criteria and administrative data to identify at-risk youth, developing relationships with key stakeholders (e.g., real estate agents), and providing ongoing support in a flexible manner. 
+
+## Interpretation
+
+Assisting care leavers in their transition to independence is a challenging area of practice, we know that transition support programs for care leavers have null effects, and if they do have a impact, they tend to be small [@taylor2024systematicreviewmetaanalysis]. Consistent with other impact evaluations, it may be that interventions like PYI are delivered too late or are not delivered at an intensity sufficient to help care leavers with the many complex challenges that they face. In the case of PYI, the fact that 31% of those who received the intervention, had at least one spell in SHS before turning 18 suggests that the intervention may have been delivered too late to change their trajectory---at least in the first 12 months post-exit. It is possible that by focusing the intervention on those care leavers who were at the highest risk---e.g., those who had previously self placed or used SHS---PYI may have been able to be provided at a higher intensity.  
+
+It is promising that care leavers find PYI highly acceptable, suggesting that they welcome the provision of supportive interventions like PYI. However, it is worrying that the insufficient and/or poor leaving care planning identified by providers crowded out the delivery of core components of the intervention. Notably, this deficient practice is consistent with reviews by NSW Office of the Children's Guardian [-@officeofthechildrensguardian2022reportleavingcare] and Victorian Commission for Children and Young People [-@commissionforchildrenandyoungpeople2020keepcaringsystemic]. 
+
+## Limitations
+
+Several limitations must be acknowledged. Firstly, the scope of our outcome data was limited to SHS use, which may overlook other relevant outcomes such as employment, income support, arrests, convictions, incarceration, unplanned pregnancies, and emergency department presentations. Furthermore, we were only able to observe outcomes between the ages of 18 (when participants left OOHC) and 19, a relatively short window during which the trajectories of those receiving PYI may not have fully diverged from their counterfactual. Additionally, the use of administrative data captures only individuals who engage with SHS, thus failing to account for those experiencing hidden homelessness (e.g., couchsurfing), potentially underestimating the true incidence of housing instability [@metraux2017usingadministrativedata]. Finally, as with any study relying on selection-on-observables, the potential for unmeasured confounding must be acknowledged. Whilst we are confident in our ability to account for the intervention’s selection criteria, we lack sufficient information to identify individuals in the comparison group who are not capable of living independently—and therefore would be ineligible for PYI. Consequently, our estimates may be biased toward the null.    
+
+## Implications for practice and policy
+
+The rationale for PYI was to prevent homelessness among care leavers. However, with nearly one-third of participants having already accessed SHS before leaving care, it is apparent that efforts must begin earlier and be more precisely targeted. Since PYI’s inception, NSW has introduced extended care until age 21, a readily scalable initiative that is appealing as a broad policy option [@mendes2023mostsignificantchild]. Some evidence suggests extended care can reduce homelessness among care leavers, but current findings are not definitive, especially regarding variations in outcomes across different groups [@taylor2024systematicreviewmetaanalysis]. Meanwhile, interventions like PYI, pose scaling challenges and may not be suited for broad adoption as a first-line strategy.
+
+Poor aftercare planning has been consistently identified as a practice issue in NSW [@taylor2020evaluationpremieryouth; @officeofthechildrensguardian2022reportleavingcare]. Quality improvement methods such as audit and feedback, which can pinpoint and rectify deficiencies in service delivery, may be a viable option to improve practice [@grimshaw2019reinvigoratingstagnantscience]. Lastly, care leavers are not a monolithic group: for some, extended care could help facilitate a more stable transition to independent, whereas for others, particularly those who may have already disengaged from their placements, it is unlikely to offer any benefit. The use of predictive modelling with administrative data could help identify high-risk care leavers earlier, enabling more targeted, preemptive responses [@cuccaro-alamin2017riskassessmentdecision]. 
+
+## Implications for research
+
+Selection-on-observables approaches, such as matching, are widely used in program evaluations. However, the strong assumptions they require—namely that all relevant confounders have been observed—often receive insufficient scrutiny. To address this, we employed a DAG to make our assumptions explicit. Although using a DAG in itself does not guarantee freedom from unmeasured confounding, it clarifies the causal pathways we hypothesise are present in the data generating process and thereby enables others to make an assessment of presence of potential biases in our analysis. We recommend their use. Likewise, we also recommend application of the potential outcomes framework as it supplies a transparent and formal means of framing a causal question. Finally, the use of *g*-computation can then help avoid the pitfalls of misinterpreting regression coefficients, commonly known as the Table 2 fallacy [@westreich2013table2fallacy]. Huntington-Klein [-@huntington-klein2022effectintroductionresearch] and Cunningham [-@cunningham2021causalinferencemixtape] provide detailed, accessible and practical resources for practitioners interested in applying such methods.
+
+Looking ahead, there remains a pressing need to improve our understanding of how care leavers and CEYP fare across critical domains at different ages—such as education, employment, mental health, and housing stability—so that we can develop policies and/or programs that provide appropriate support at the right time. Linked administrative data offers excellent opportunities to undertake this important epidemiological work. 
+
+# Conclusion
+
+Young people leaving OOHC face elevated risks of harm, largely because they are often obliged to fend for themselves at an age when their counterparts in the community would still be able to rely on their families for financial and social support. The provision of appropriate and effective support to young people leaving OOHC is an issue of cross-national interest—particularly in high-income countries. Evaluating interventions like PYI helps to advance our knowledge about 'what works', even if none of the things we are trying appear to work. In the absence of experimental studies, careful observational approaches such as this one can contribute toward building the evidence base.  
+
+Young people transitioning from OOHC face an elevated risk of adverse outcomes, partly because they must assume adult responsibilities at an age when their peers in the general community typically retain familial and financial support. The provision of suitable and effective assistance to these young people remains a priority in high-income countries. Evaluating interventions like the PYI is essential for advancing our understanding of ‘what works,’ even (and perhaps especially) when results show limited or no effect. In the absence of experimental studies, careful application of observational methods---such as those employed in this research---can play a crucial role in building the evidence base. By illuminating both the strengths and weaknesses of current approaches, such work helps inform the refinement of services, ensuring that support for care leavers is guided by the best available evidence.
+
+# References
