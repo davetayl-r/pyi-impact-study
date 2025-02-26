@@ -46,3 +46,90 @@ table {
   text-decoration: none;
   cursor: pointer;
 }
+
+/* Specific settings for supplementary material */
+
+/* reset the number counter: note, ensure: number-sections: false in YAML */
+body {
+  counter-reset: section;
+}
+
+/* insert custom 's' in front of headings for supplementary material */
+
+/* H1 => S1, S2, etc. */
+h1 {
+  counter-reset: subsection; /* resets the H2 counter */
+  position: relative;
+  margin-left: 0; /* no indent */
+}
+h1::before {
+  counter-increment: section; /* increment the main counter */
+  content: "S" counter(section) " ";
+  margin-right: 0.5em; /* space between number and heading text */
+}
+
+/* H2 => S1.1, S2.1, etc. */
+h2 {
+  counter-reset: subsubsection; /* resets the H3 counter */
+  position: relative;
+  margin-left: 0;
+}
+h2::before {
+  counter-increment: subsection;
+  content: "S" counter(section) "." counter(subsection) " ";
+  margin-right: 0.5em;
+}
+
+/* H3 => S1.1.1, etc. */
+h3 {
+  position: relative;
+  margin-left: 0;
+}
+h3::before {
+  counter-increment: subsubsection;
+  content: "S" counter(section) "." counter(subsection) "." counter(subsubsection) " ";
+  margin-right: 0.5em;
+}
+
+/* set exclusions i.e., headings I don't want to be numbered */
+
+/* title */
+.title-block h1::before,
+h1.title::before {
+  content: none !important;
+  counter-increment: none !important;
+}
+
+/* references */
+h1#refs::before,
+h2#refs::before,
+h3#refs::before {
+  content: none !important;
+  counter-increment: none !important;
+}
+
+/* floating toc header  */
+#toc-title::before {
+  content: none !important;
+  counter-increment: none !important;
+}
+
+/* references in side bar */
+#quarto-margin-sidebar > nav > h1::before {
+  content: none !important;
+  counter-increment: none !important;
+}
+
+/* refs */
+h1:has(+ div#refs)::before {
+  content: none !important;
+  counter-increment: none !important;
+}
+
+/* set visual styling for the numbering */
+h1::before,
+h2::before,
+h3::before {
+  color: #868e96; 
+  font-weight: bold; 
+}

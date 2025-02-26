@@ -1,5 +1,5 @@
 ---
-title: "A Hybrid type-1 Implementation-Effectiveness Study of an Accommodation and Support Intervention for Care Leavers in Australia: Using Propensity Score Matching to Examine Homelessness Outcomes --- supplementary material"
+title: "Examining the impact of an Accommodation and Support Intervention in reducing homelessness amongst Care Leavers in Australia: A hybrid type-1 Implementation-Effectiveness Study using Propensity Score methods --- supplementary material"
 author: 
   - name: David Taylor
     affiliation: Monash University
@@ -16,16 +16,27 @@ author:
   - name: Aron Shlonsky
     affiliation: Monash University
     orcid: 0000-0001-8096-726X
-date: 2025-02-14
-citation:
-  doi: "TBD"
-  url: https://davetayl-r.github.io/pyi-impact-study
+date: 2025-02-28
+citation: false
 bibliography: pyi-impact-study-supplementary-material.bib
 csl: apa-6th-edition.csl
 link-citations: true
+crossref:
+  custom:
+    - key: suppfig
+      kind: float
+      reference-prefix: Figure S
+      caption-prefix: Figure S
+      space-before-numbering: false
+      caption-location: "top"
+    - key: supptbl
+      kind: float
+      reference-prefix: Table S
+      caption-prefix: Table S
+      space-before-numbering: false
+      caption-location: "top"  
 format: 
   html: 
-    number-sections: true
     highlight-style: ayu
     css: styles.css
 tbl-cap-location: "top"
@@ -83,6 +94,10 @@ The following information is provided here:
 
 -   [*Matching diagnostic tests*](#sec-match-diagnostic) --- includes the diagnostic visualisations we used to assess covariate balance and common support.
 
+-   [*Focus groups with intervention participants*](#sec-qualitative—sample-participants)
+
+-   [*Focus groups with provider and funder stakeholders*](#sec-qualitative—sample-provider-funder)
+
 [**Supplementary results:**](#sec-results)
 
 -   [*Treatment effect results*](#sec-treatment-effect) --- includes the full results of our ATT estimates
@@ -99,86 +114,488 @@ The code to produce this supplementary material, along with the analysis code fo
 
 ## STROBE checklist {#sec-strobe-checklist}
 
-The STROBE checklist [@elm2007strengtheningreportingobservational] with RECORD extension [@benchimol2015reportingstudiesconducted] is included in @tbl-pyi-strobe-checklist.
+The STROBE checklist [@elm2007strengtheningreportingobservational] with RECORD extension [@benchimol2015reportingstudiesconducted] is included in @supptbl-pyi-strobe-checklist.
 
-| Item No. | STROBE Items | Location in Manuscript | RECORD Items | Location in Manuscript |
-|----|----|----|----|----|
-| 1 | \(a\) Indicate the study’s design with a commonly used term in the title or the abstract (b) Provide in the abstract an informative and balanced summary of what was done and what was found |  | RECORD 1.1: The type of data used should be specified in the title or abstract. When possible, the name of the databases used should be included. <br> RECORD 1.2: If applicable, the geographic region and timeframe within which the study took place should be reported in the title or abstract. <br> RECORD 1.3: If linkage between databases was conducted for the study, this should be clearly stated in the title or abstract. |  |
-| 2 | Explain the scientific background and rationale for the investigation being reported |  |  |  |
-| 3 | State specific objectives, including any prespecified hypotheses |  |  |  |
-| 4 | Present key elements of study design early in the paper |  |  |  |
-| 5 | Describe the setting, locations, and relevant dates, including periods of recruitment, exposure, follow-up, and data collection |  |  |  |
-| 6 | \(a\) Cohort study - Give the eligibility criteria, and the sources and methods of selection of participants. Describe methods of follow-up <br> Case-control study - Give the eligibility criteria, and the sources and methods of case ascertainment and control selection. Give the rationale for the choice of cases and controls <br> Cross-sectional study - Give the eligibility criteria, and the sources and methods of selection of participants <br> (b) Cohort study - For matched studies, give matching criteria and number of exposed and unexposed <br> Case-control study - For matched studies, give matching criteria and the number of controls per case |  | RECORD 6.1: The methods of study population selection (such as codes or algorithms used to identify subjects) should be listed in detail. If this is not possible, an explanation should be provided. <br> RECORD 6.2: Any validation studies of the codes or algorithms used to select the population should be referenced. If validation was conducted for this study and not published elsewhere, detailed methods and results should be provided. <br> RECORD 6.3: If the study involved linkage of databases, consider use of a flow diagram or other graphical display to demonstrate the data linkage process, including the number of individuals with linked data at each stage. |  |
-| 7 | Clearly define all outcomes, exposures, predictors, potential confounders, and effect modifiers. Give diagnostic criteria, if applicable. |  | RECORD 7.1: A complete list of codes and algorithms used to classify exposures, outcomes, confounders, and effect modifiers should be provided. If these cannot be reported, an explanation should be provided. |  |
-| 8 | For each variable of interest, give sources of data and details of methods of assessment (measurement). Describe comparability of assessment methods if there is more than one group |  |  |  |
-| 9 | Describe any efforts to address potential sources of bias |  |  |  |
-| 10 | Explain how the study size was arrived at |  |  |  |
-| 11 | Explain how quantitative variables were handled in the analyses. If applicable, describe which groupings were chosen, and why |  |  |  |
-| 12 | \(a\) Describe all statistical methods, including those used to control for confounding <br> (b) Describe any methods used to examine subgroups and interactions <br> (c) Explain how missing data were addressed <br> (d) Cohort study - If applicable, explain how loss to follow-up was addressed <br> Case-control study - If applicable, explain how matching of cases and controls was addressed <br> Cross-sectional study - If applicable, describe analytical methods taking account of sampling strategy <br> (e) Describe any sensitivity analyses |  | RECORD 12.1: Authors should describe the extent to which the investigators had access to the database population used to create the study population. <br> RECORD 12.2: Authors should provide information on the data cleaning methods used in the study. <br> RECORD 12.3: State whether the study included person-level, institutional-level, or other data linkage across two or more databases. The methods of linkage and methods of linkage quality evaluation should be provided. |  |
-| 13 | \(a\) Report the numbers of individuals at each stage of the study (e.g., numbers potentially eligible, examined for eligibility, confirmed eligible, included in the study, completing follow-up, and analysed) <br> (b) Give reasons for non-participation at each stage. <br> (c) Consider use of a flow diagram |  | RECORD 13.1: Describe in detail the selection of the persons included in the study (i.e., study population selection) including filtering based on data quality, data availability and linkage. The selection of included persons can be described in the text and/or by means of the study flow diagram. |  |
+::: {#supptbl-pyi-strobe-checklist float="supptbl" tbl-colwidths="[10, 50, 50, 50, 50]"}
++----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+| Item No. | STROBE Items                                                                                                                                                                                                          | Location in Manuscript                                                                 | RECORD Items                                                                                                                                                                                                                                                                                              | Location in Manuscript                                                                                           |
++==========+=======================================================================================================================================================================================================================+========================================================================================+===========================================================================================================================================================================================================================================================================================================+==================================================================================================================+
+| 1        | \(a\) Indicate the study’s design with a commonly used term in the title or the abstract                                                                                                                              | \(a\) Use of propensity score methods are cited in the title                           | RECORD 1.1: The type of data used should be specified in the title or abstract. When possible, the name of the databases used should be included. <br>                                                                                                                                                    | 1.1. This has been specified in the abstract                                                                     |
+|          |                                                                                                                                                                                                                       |                                                                                        |                                                                                                                                                                                                                                                                                                           |                                                                                                                  |
+|          | \(b\) Provide in the abstract an informative and balanced summary of what was done and what was found                                                                                                                 | \(b\) Details are provided in the abstract                                             | RECORD 1.2: If applicable, the geographic region and timeframe within which the study took place should be reported in the title or abstract. <br>                                                                                                                                                        | 1.2. The country the study was undertaken in was specified in the title. The state was specified in the abstract |
+|          |                                                                                                                                                                                                                       |                                                                                        |                                                                                                                                                                                                                                                                                                           |                                                                                                                  |
+|          |                                                                                                                                                                                                                       |                                                                                        | RECORD 1.3: If linkage between databases was conducted for the study, this should be clearly stated in the title or abstract.                                                                                                                                                                             | 1.3. Specified in the abstract                                                                                   |
++----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+| 2        | Explain the scientific background and rationale for the investigation being reported                                                                                                                                  | See sections 'Background' and 'Existing evidence' in the Introduction                  |                                                                                                                                                                                                                                                                                                           |                                                                                                                  |
++----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+| 3        | State specific objectives, including any prespecified hypotheses                                                                                                                                                      | See 'Objectives' section in the Introduction                                           |                                                                                                                                                                                                                                                                                                           |                                                                                                                  |
++----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+| 4        | Present key elements of study design early in the paper                                                                                                                                                               | See 'Study design and setting' in the Methodology section                              |                                                                                                                                                                                                                                                                                                           |                                                                                                                  |
++----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+| 5        | Describe the setting, locations, and relevant dates, including periods of recruitment, exposure, follow-up, and data collection                                                                                       | See 'Study design and setting' and 'Participants and recruitment' sections             |                                                                                                                                                                                                                                                                                                           |                                                                                                                  |
++----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+| 6        | \(a\) Cohort study - Give the eligibility criteria, and the sources and methods of selection of participants. Describe methods of follow-up                                                                           | \(a\) See section 'Intervention inclusion and exclusion criteria'                      | RECORD 6.1: The methods of study population selection (such as codes or algorithms used to identify subjects) should be listed in detail. If this is not possible, an explanation should be provided. <br>                                                                                                | 6.1. See section 'Intervention recruitment'                                                                      |
+|          |                                                                                                                                                                                                                       |                                                                                        |                                                                                                                                                                                                                                                                                                           |                                                                                                                  |
+|          | \(b\) Cohort study - For matched studies, give matching criteria and number of exposed and unexposed                                                                                                                  | \(b\) See 'Identification and Estimation Strategy' for criteria and Table 2 for counts | RECORD 6.2: Any validation studies of the codes or algorithms used to select the population should be referenced. If validation was conducted for this study and not published elsewhere, detailed methods and results should be provided. <br>                                                           | 6.2. Not applicable for this study                                                                               |
+|          |                                                                                                                                                                                                                       |                                                                                        |                                                                                                                                                                                                                                                                                                           |                                                                                                                  |
+|          |                                                                                                                                                                                                                       |                                                                                        | RECORD 6.3: If the study involved linkage of databases, consider use of a flow diagram or other graphical display to demonstrate the data linkage process, including the number of individuals with linked data at each stage.                                                                            | 6.3. See section 'Data and Measures'                                                                             |
++----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+| 7        | Clearly define all outcomes, exposures, predictors, potential confounders, and effect modifiers. Give diagnostic criteria, if applicable.                                                                             | See @supptbl-pyi-var-defs                                                              | RECORD 7.1: A complete list of codes and algorithms used to classify exposures, outcomes, confounders, and effect modifiers should be provided. If these cannot be reported, an explanation should be provided.                                                                                           | 7.1. See 'Identification and estimation strategy' and specifically, the DAG in Figure 1                          |
++----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+| 8        | For each variable of interest, give sources of data and details of methods of assessment (measurement). Describe comparability of assessment methods if there is more than one group                                  | See 'Data and measures' section and @supptbl-pyi-var-defs                              |                                                                                                                                                                                                                                                                                                           |                                                                                                                  |
++----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+| 9        | Describe any efforts to address potential sources of bias                                                                                                                                                             | See 'Identification and Estimation Strategy' section and the DAG in Figure 1           |                                                                                                                                                                                                                                                                                                           |                                                                                                                  |
++----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+| 10       | Explain how the study size was arrived at                                                                                                                                                                             | See Table 2 for matching results and matched sample size                               |                                                                                                                                                                                                                                                                                                           |                                                                                                                  |
++----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+| 11       | Explain how quantitative variables were handled in the analyses. If applicable, describe which groupings were chosen, and why                                                                                         | See section 'Treatment Effect Estimation'                                              |                                                                                                                                                                                                                                                                                                           |                                                                                                                  |
++----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+| 12       | \(a\) Describe all statistical methods, including those used to control for confounding <br>                                                                                                                          | \(a\) See 'Propensity Score Matching Specification' and 'Treatment Effect Estimation'  | RECORD 12.1: Authors should describe the extent to which the investigators had access to the database population used to create the study population. <br>                                                                                                                                                | 12.1. See 'Ethical approval' section                                                                             |
+|          |                                                                                                                                                                                                                       |                                                                                        |                                                                                                                                                                                                                                                                                                           |                                                                                                                  |
+|          | \(b\) Describe any methods used to examine subgroups and interactions <br>                                                                                                                                            | \(b\) See 'Treatment Effect Heterogeneity' and 'Subgroup Analysis' sections            | RECORD 12.2: Authors should provide information on the data cleaning methods used in the study. <br>                                                                                                                                                                                                      | 12.2. See section 'Data and Measures'                                                                            |
+|          |                                                                                                                                                                                                                       |                                                                                        |                                                                                                                                                                                                                                                                                                           |                                                                                                                  |
+|          | \(c\) Explain how missing data were addressed <br>                                                                                                                                                                    | \(c\) Not applicable                                                                   | RECORD 12.3: State whether the study included person-level, institutional-level, or other data linkage across two or more databases. The methods of linkage and methods of linkage quality evaluation should be provided.                                                                                 | 12.3. See section 'Data and Measures'                                                                            |
+|          |                                                                                                                                                                                                                       |                                                                                        |                                                                                                                                                                                                                                                                                                           |                                                                                                                  |
+|          | \(d\) Cohort study - If applicable, explain how loss to follow-up was addressed <br>                                                                                                                                  | \(d\) Not applicable                                                                   |                                                                                                                                                                                                                                                                                                           |                                                                                                                  |
+|          |                                                                                                                                                                                                                       |                                                                                        |                                                                                                                                                                                                                                                                                                           |                                                                                                                  |
+|          | \(e\) Describe any sensitivity analyses                                                                                                                                                                               | \(e\) See 'Sensitivity Analysis' and section @sec-sensitivity-analysis                 |                                                                                                                                                                                                                                                                                                           |                                                                                                                  |
++----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
+| 13       | \(a\) Report the numbers of individuals at each stage of the study (e.g., numbers potentially eligible, examined for eligibility, confirmed eligible, included in the study, completing follow-up, and analysed) <br> | \(a\) See Table 2 for matching results and final analysis sample sizes                 | RECORD 13.1: Describe in detail the selection of the persons included in the study (i.e., study population selection) including filtering based on data quality, data availability and linkage. The selection of included persons can be described in the text and/or by means of the study flow diagram. | 13.1 See sections 'Participants and recruitment'; 'Data and Measures' and 'Population characteristics'           |
+|          |                                                                                                                                                                                                                       |                                                                                        |                                                                                                                                                                                                                                                                                                           |                                                                                                                  |
+|          | \(b\) Give reasons for non-participation at each stage. <br>                                                                                                                                                          | \(b\) See section 'Propensity Score Matching Specification'                            |                                                                                                                                                                                                                                                                                                           |                                                                                                                  |
+|          |                                                                                                                                                                                                                       |                                                                                        |                                                                                                                                                                                                                                                                                                           |                                                                                                                  |
+|          | \(c\) Consider use of a flow diagram                                                                                                                                                                                  | \(c\) This is not appropriate for our study design                                     |                                                                                                                                                                                                                                                                                                           |                                                                                                                  |
++----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
 
-: STROBE checklist with RECORD extension {#tbl-pyi-strobe-checklist}
+: STROBE checklist with RECORD extension
+:::
 
 ## Propensity Score Methods reporting checklist {#sec-matching-checklist}
 
-The checklist of reporting guidelines by Thoemmes and Kim [-@thoemmes2011systematicreviewpropensity] is detailed in @tbl-pyi-psm-checklist.
+The checklist of reporting guidelines by Thoemmes and Kim [-@thoemmes2011systematicreviewpropensity] is detailed in @supptbl-pyi-psm-checklist.
 
-| \# | Characteristic | Location in manuscript |
-|----|----|----|
-| 1 | List of all covariates that were collected (with reliabilities) |  |
-| 2 | List of all covariates that were used to estimate the propensity score |  |
-| 3 | Method that was used to determine set of covariates used for estimation (e.g., nonparsimonious model, predetermined significance threshold) |  |
-| 4 | Inclusion of polynomial or interaction terms |  |
-| 5 | Estimation method for propensity scores (e.g., logistic regression, regression trees) |  |
-| 6 | Conditioning strategy (e.g., matching, stratification, weighting) |  |
-| 7 | Region of common support (histograms, ranges) |  |
-| 8 | Details on matching scheme, if applicable |  |
-| 8.1 | Type of matching algorithm (e.g., nearest neighbor, optimal, full, kernel) |  |
-| 8.2 | Number of treated and control units that were matched with each other (e.g., 1:1, 1:many) |  |
-| 8.3 | Matching with or without replacement |  |
-| 8.4 | Caliper width, if applicable | Not applicable |
-| 9 | Details on stratification, if applicable | Not applicable |
-| 9.1 | Number of strata | Not applicable |
-| 9.2 | Strategy to define strata (equal proportions, minimize variance) |  |
-| 10 | Details on weighting, if applicable |  |
-| 10.1 | Type of weights used (inverse probability weights, odd weights) |  |
-| 10.2 | Distribution of weights, reporting of unusually large weights |  |
-| 11 | Sample size before and after conditioning; report effective sample size if weights are used |  |
-| 12 | Standardized difference before and after matching on the propensity score and all covariates, potentially also on interactions and quadratic terms |  |
-| 13 | Point estimate of treatment effect and associated standard error |  |
-| 14 | Inclusion of covariates in outcome model |  |
+::: {#supptbl-pyi-psm-checklist float="supptbl" tbl-colwidths="[10, 50, 50]"}
++-----------+----------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| \#        | Characteristic                                                                                                                                     | Location in manuscript                                                                                                                          |
++===========+====================================================================================================================================================+=================================================================================================================================================+
+| 1         | List of all covariates that were collected (with reliabilities)                                                                                    | Supplementary material @supptbl-pyi-var-defs                                                                                                    |
++-----------+----------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| 2         | List of all covariates that were used to estimate the propensity score                                                                             | Supplementary material @suppfig-pyi-love-plot                                                                                                   |
++-----------+----------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| 3         | Method that was used to determine set of covariates used for estimation (e.g., nonparsimonious model, predetermined significance threshold)        | See section 'Propensity Score Matching Specification'                                                                                           |
++-----------+----------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| 4         | Inclusion of polynomial or interaction terms                                                                                                       | Not applicable                                                                                                                                  |
++-----------+----------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| 5         | Estimation method for propensity scores (e.g., logistic regression, regression trees)                                                              | See section 'Propensity Score Matching Specification'                                                                                           |
++-----------+----------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| 6         | Conditioning strategy (e.g., matching, stratification, weighting)                                                                                  | See section 'Propensity Score Matching Specification'                                                                                           |
++-----------+----------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| 7         | Region of common support (histograms, ranges)                                                                                                      | Supplementary material @suppfig-pyi-halfmoon-plot                                                                                               |
++-----------+----------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| 8         | Details on matching scheme, if applicable                                                                                                          | See section 'Propensity Score Matching Specification'                                                                                           |
++-----------+----------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| 8.1       | Type of matching algorithm (e.g., nearest neighbor, optimal, full, kernel)                                                                         | See section 'Propensity Score Matching Specification'                                                                                           |
++-----------+----------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| 8.2       | Number of treated and control units that were matched with each other (e.g., 1:1, 1:many)                                                          | See section 'Propensity Score Matching Specification'                                                                                           |
++-----------+----------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| 8.3       | Matching with or without replacement                                                                                                               | See section 'Propensity Score Matching Specification'                                                                                           |
++-----------+----------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| 8.4       | Caliper width, if applicable                                                                                                                       | Not applicable                                                                                                                                  |
++-----------+----------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| 9         | Details on stratification, if applicable                                                                                                           | Not applicable                                                                                                                                  |
++-----------+----------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| 9.1       | Number of strata                                                                                                                                   | Not applicable                                                                                                                                  |
++-----------+----------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| 9.2       | Strategy to define strata (equal proportions, minimize variance)                                                                                   | Not applicable                                                                                                                                  |
++-----------+----------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| 10        | Details on weighting, if applicable                                                                                                                | Not applicable                                                                                                                                  |
++-----------+----------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| 10.1      | Type of weights used (inverse probability weights, odd weights)                                                                                    | Not applicable                                                                                                                                  |
++-----------+----------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| 10.2      | Distribution of weights, reporting of unusually large weights                                                                                      | Not applicable                                                                                                                                  |
++-----------+----------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| 11        | Sample size before and after conditioning; report effective sample size if weights are used                                                        | This is included in Table 2                                                                                                                     |
++-----------+----------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| 12        | Standardized difference before and after matching on the propensity score and all covariates, potentially also on interactions and quadratic terms | Supplementary material @suppfig-pyi-love-plot                                                                                                   |
++-----------+----------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| 13        | Point estimate of treatment effect and associated standard error                                                                                   | This is summarised in Table 3 with additional detail provided in supplementary material: @supptbl-pyi-att-full-match, @supptbl-pyi-att-nn-match |
++-----------+----------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| 14        | Inclusion of covariates in outcome model                                                                                                           | This is detailed in the section 'Treatment Effect Estimation'                                                                                   |
++-----------+----------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
 
-: Reporting guidelines for studies using Propensity Score Methods by Thoemmes & Kim (2011) {#tbl-pyi-psm-checklist}
+Reporting guidelines for studies using Propensity Score Methods by Thoemmes & Kim (2011)
+:::
 
 # Supplementary methodology {#sec-methodology}
 
-## Variables from administrative data {sec-variables}
+## Variables from administrative data {#sec-variables}
 
-We have defined the variables that we used in our matching and outcome models in @tbl-var-defs below.
+We have defined the variables that we used in our matching and outcome models in @supptbl-pyi-var-defs below.
 
-| Variable | Definition | Source |
-|----|----|----|
-| `male` | Binary indicator for male | ChildStory |
-| `aboriginal` | Binary indicator for Aboriginal and Torres Strait Islander status ever recorded | ChildStory |
-| `eligible_residential_care_placement` | Binary indicator for whether an individual was in a placement type recorded as "Residential Care" during their eligibility window | ChildStory |
-| `eligible_time_in_care` | Binary indicator for whether an individual had spent 12 or more months in OOHC by either the start or end of their eligibility window | ChildStory |
-| `eligible_placement_instability` | Binary indicator capturing placement instability through either: (1) More than 3 placements (lasting 30+ days) by either the start or end of eligibility window, OR (2) Any placement (lasting 30+ days) in either 6 months before eligibility window, 12 months before eligibility window, or during eligibility window itself, OR (3) Being in independent living arrangements in their last placement | ChildStory |
-| `eligible_permanent_placement` | Binary indicator for whether an individual was in a placement with purpose recorded as "Permanent Care" during their eligibility window | ChildStory |
-| `eligible_kinship_care_placement` | Binary indicator for whether an individual was in a kinship care placement during their eligibility window | ChildStory |
-| `parental_responsibility_minister_eligiblity_period` | Binary indicator for whether the Minister had parental responsibility for the individual during their eligibility window | ChildStory |
-| `any_housing_spell_before_18` | Binary indicator for whether an individual had any contact with SHS for 'housing reasons' between their 16th and 18th birthday | CIMS |
-| `in_housing_spell_on_date_18` | Binary indicator for being in a SHS spell on their 18th birthday | CIMS |
-| `in_housing_spell_on_date_19` | Binary indicator for being in a SHS spell on their 19th birthday | CIMS |
-| `new_housing_spell_between_18_19` | Binary indicator for any new SHS spell between 18th and 19th birthday | CIMS |
-| `new_ongoing_housing_spell_between_18_19` | Binary indicator for either continuing or new SHS spell between 18th and 19th birthday | CIMS |
-| `new_unsheltered_homelessness_between_18_19` | Binary indicator for new spell of unsheltered homelessness between 18th and 19th birthday, where unsheltered homelessness is defined as either: (1) current residential dwelling is a tent, improvised dwelling, no dwelling (in the open), or motor vehicle, OR (2) residential dwelling in last week was a tent, improvised dwelling, no dwelling (in the open), or motor vehicle, OR (3) reported sleeping rough or in non-conventional accommodation in the last week | CIMS |
-| `new_ongoing_unsheltered_homelessness_between_18_19` | Binary indicator for a new or continuing spell of unsheltered homelessness between 18th and 19th birthday, where unsheltered homelessness is defined as either: (1) current residential dwelling is a tent, improvised dwelling, no dwelling (in the open), or motor vehicle, OR (2) residential dwelling in last week was a tent, improvised dwelling, no dwelling (in the open), or motor vehicle, OR (3) reported sleeping rough or in non-conventional accommodation in the last week | CIMS |
-| `new_short_term_accommodation_required_between_18_19` | Binary indicator for new spell requiring short-term accommodation between 18th and 19th birthday (based on Short_Term_Accom_ind in CIMS) | CIMS |
-| `new_ongoing_short_term_accommodation_required_between_18_19` | Binary indicator for either continuing or new spell requiring short-term accommodation between 18th and 19th birthday (based on Short_Term_Accom_ind in CIMS) | CIMS |
-| `count_total_spells_18_19` | Count of total number of distinct SHS spells between 18th and 19th birthday | CIMS |
-| `time_in_housing_support_18_19` | Total days in SHS between 18th and 19th birthday | CIMS |
+::: {#supptbl-pyi-var-defs float="supptbl"}
++---------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| Variable                                                      | Definition                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Source     |
++===============================================================+===========================================================================================================================================================================================================================================================================================================================================================================================================================================================================================+============+
+| `male`                                                        | Binary indicator for male                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | ChildStory |
++---------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| `aboriginal`                                                  | Binary indicator for Aboriginal and Torres Strait Islander status ever recorded                                                                                                                                                                                                                                                                                                                                                                                                           | ChildStory |
++---------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| `eligible_residential_care_placement`                         | Binary indicator for whether an individual was in a placement type recorded as "Residential Care" during their eligibility window                                                                                                                                                                                                                                                                                                                                                         | ChildStory |
++---------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| `eligible_time_in_care`                                       | Binary indicator for whether an individual had spent 12 or more months in OOHC by either the start or end of their eligibility window                                                                                                                                                                                                                                                                                                                                                     | ChildStory |
++---------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| `eligible_placement_instability`                              | Binary indicator capturing placement instability through either: (1) More than 3 placements (lasting 30+ days) by either the start or end of eligibility window, OR (2) Any placement (lasting 30+ days) in either 6 months before eligibility window, 12 months before eligibility window, or during eligibility window itself, OR (3) Being in independent living arrangements in their last placement                                                                                  | ChildStory |
++---------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| `eligible_permanent_placement`                                | Binary indicator for whether an individual was in a placement with purpose recorded as "Permanent Care" during their eligibility window                                                                                                                                                                                                                                                                                                                                                   | ChildStory |
++---------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| `eligible_kinship_care_placement`                             | Binary indicator for whether an individual was in a kinship care placement during their eligibility window                                                                                                                                                                                                                                                                                                                                                                                | ChildStory |
++---------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| `parental_responsibility_minister_eligiblity_period`          | Binary indicator for whether the Minister had parental responsibility for the individual during their eligibility window                                                                                                                                                                                                                                                                                                                                                                  | ChildStory |
++---------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| `any_housing_spell_before_18`                                 | Binary indicator for whether an individual had any contact with SHS for 'housing reasons' between their 16th and 18th birthday                                                                                                                                                                                                                                                                                                                                                            | CIMS       |
++---------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| `in_housing_spell_on_date_18`                                 | Binary indicator for being in a SHS spell on their 18th birthday                                                                                                                                                                                                                                                                                                                                                                                                                          | CIMS       |
++---------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| `in_housing_spell_on_date_19`                                 | Binary indicator for being in a SHS spell on their 19th birthday                                                                                                                                                                                                                                                                                                                                                                                                                          | CIMS       |
++---------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| `new_housing_spell_between_18_19`                             | Binary indicator for any new SHS spell between 18th and 19th birthday                                                                                                                                                                                                                                                                                                                                                                                                                     | CIMS       |
++---------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| `new_ongoing_housing_spell_between_18_19`                     | Binary indicator for either continuing or new SHS spell between 18th and 19th birthday                                                                                                                                                                                                                                                                                                                                                                                                    | CIMS       |
++---------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| `new_unsheltered_homelessness_between_18_19`                  | Binary indicator for new spell of unsheltered homelessness between 18th and 19th birthday, where unsheltered homelessness is defined as either: (1) current residential dwelling is a tent, improvised dwelling, no dwelling (in the open), or motor vehicle, OR (2) residential dwelling in last week was a tent, improvised dwelling, no dwelling (in the open), or motor vehicle, OR (3) reported sleeping rough or in non-conventional accommodation in the last week                 | CIMS       |
++---------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| `new_ongoing_unsheltered_homelessness_between_18_19`          | Binary indicator for a new or continuing spell of unsheltered homelessness between 18th and 19th birthday, where unsheltered homelessness is defined as either: (1) current residential dwelling is a tent, improvised dwelling, no dwelling (in the open), or motor vehicle, OR (2) residential dwelling in last week was a tent, improvised dwelling, no dwelling (in the open), or motor vehicle, OR (3) reported sleeping rough or in non-conventional accommodation in the last week | CIMS       |
++---------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| `new_short_term_accommodation_required_between_18_19`         | Binary indicator for new spell requiring short-term accommodation between 18th and 19th birthday (based on Short_Term_Accom_ind in CIMS)                                                                                                                                                                                                                                                                                                                                                  | CIMS       |
++---------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| `new_ongoing_short_term_accommodation_required_between_18_19` | Binary indicator for either continuing or new spell requiring short-term accommodation between 18th and 19th birthday (based on Short_Term_Accom_ind in CIMS)                                                                                                                                                                                                                                                                                                                             | CIMS       |
++---------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| `count_total_spells_18_19`                                    | Count of total number of distinct SHS spells between 18th and 19th birthday                                                                                                                                                                                                                                                                                                                                                                                                               | CIMS       |
++---------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| `time_in_housing_support_18_19`                               | Total days in SHS between 18th and 19th birthday                                                                                                                                                                                                                                                                                                                                                                                                                                          | CIMS       |
++---------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+
 
-: Variable definitions and sources {#tbl-var-defs}
+Variable definitions and sources
+:::
+
+## Focus groups with intervention participants {#sec-qualitative-sample-participants}
+
+### Participant details
+
+Focus groups with a sample of intervention participants were conducted face-to-face. Participants from all sites were represented. Details are summarised in @supptbl-focus-group-participants.
+
+::: {#supptbl-focus-group-participants float="supptbl"}
++-------------------------------------+-------------------------+---------------------+---------------+
+| PYI provider catchment              | Location of focus group | Number of attendees | Month held    |
++:====================================+:========================+:====================+:==============+
+| Central Coast & Hunter              | Newcastle               | 12                  | October 2019  |
++-------------------------------------+-------------------------+---------------------+---------------+
+| Mid North Coast & Northern NSW      | Lismore                 | 8                   | October 2019  |
++-------------------------------------+-------------------------+---------------------+---------------+
+| New England                         | Tamworth                | \<5                 | October 2019  |
++-------------------------------------+-------------------------+---------------------+---------------+
+| Western NSW                         | Bathurst                | \<5                 | October 2019  |
++-------------------------------------+-------------------------+---------------------+---------------+
+| South Western Sydney                | Campbelltown            | 6                   | November 2019 |
++-------------------------------------+-------------------------+---------------------+---------------+
+| Nepean Blue Mountains               | Penrith                 | 5                   | November 2019 |
++-------------------------------------+-------------------------+---------------------+---------------+
+| Illawarra Shoalhaven & Southern NSW | Wollongong              | \<5                 | November 2019 |
++-------------------------------------+-------------------------+---------------------+---------------+
+
+Details of focus groups with intervention participants
+:::
+
+### Recruitment and consent process
+
+<h4>Invitation</h4>
+
+-   The Evaluation Team contacted providers by email in September 2019 and requested their assistance to identify and approach clients who might be willing to participate in a focus group to discuss PYI
+-   Additional contact was made with provider contacts to answer questions and clarify the content and scope of the focus group
+
+<h4>Recruitment</h4>
+
+-   Young people receiving PYI services, aged 18 years or older, were invited by their PYI providers to participate in a focus group on the PYI program (PYI providers were provided with an explanatory statement, consent forms and discussion guides to assist in the recruitment of young people for interview)
+-   Providers used the Explanatory Statement approved by the Monash University Human Research Ethics Committee to inform young people about the purpose and nature of the focus group and invite them to participate
+
+<h4>Focus groups</h4>
+
+-   Focus groups were held in-person at or near the PYI providers usual place of business
+-   Sessions lasted for between 60 minutes
+-   Sessions were facilitated by two experienced qualitative researchers from CEI — one of whom had qualifications in either social work or psychology — who shared roles as moderator and scribe
+-   A semi-structured discussion guide was developed to guide discussion — it is included in @sec-participant-discussion-guide.
+
+<h4>Consent</h4>
+
+-   Prior to the focus group participants were provided with a copy of the Explanatory Statement, consent details and discussion guide
+-   The facilitator verbally went through the explanatory statement and consent procedures prior to commencement
+-   Participants signed a consent form with one copy retained by the participant and one retained by the facilitator
+-   Young people who provided consent to participate in the focus groups were provided with a gift voucher — not redeemable for alcohol or tobacco products — valued at \$25
+-   Respondent feedback was recorded by hand by facilitators anonymously to protect the confidentiality of respondents
+
+### Discussion guide {#sec-participant-discussion-guide}
+
+<h4>Introduction</h4>
+
+-   How long have you been involved in PYI services?
+
+<h4>Personal advisor</h4>
+
+-   Do you all have a personal advisor?
+-   Did your personal advisor help you by:
+    -   supporting you to complete your leaving care plan?
+    -   assisting you to grow your support network?
+-   Is there anything they could have done differently?
+
+<h4>Transitional support</h4>
+
+-   Have you all met with your transitional support worker?
+-   Did your transitional support worker help you by:
+    -   asking about your accommodation needs?
+    -   assisting with securing accommodation by working with a real estate agent or community housing provider?
+-   Is there anything they could have done differently?
+
+<h4>Education and employment mentoring</h4>
+
+-   Have you all met with your education and employment mentor?
+-   How did they help you?
+-   Did they help you by:
+    -   Choosing education and employment goals?
+    -   Helping you apply for education / jobs?
+-   Is there anything they could have done differently?
+
+<h4>General feedback</h4>
+
+-   Were you able to get help when you needed it?
+-   Would you like to add anything about stuff that’s been challenging for you, that you would like to see improved with PYI?
+-   Is there anything about stuff that you really enjoy about PYI that you would like to see more of?
+
+<h4>Overall</h4>
+
+-   Do you have any other feedback on how PYI could be improved?
+
+## Focus groups with representatives from service and housing providers {#sec-qualitative-sample-provider}
+
+### Participant details
+
+#### PYI service providers
+
+Focus groups were conducted in person with key representatives from PYI service providers. Participants across all sites included senior staff responsible for program management and funder engagement, as well as frontline workers who directly supported program participants. Representatives from all service providers participated in the focus groups. Details of the focus group composition and locations are summarised in @supptbl-focus-group-service-providers.
+
+::: {#supptbl-focus-group-service-providers float="supptbl"}
++-------------------------------------+-------------------------+---------------------+---------------+
+| PYI provider catchment              | Location of focus group | Number of attendees | Month held    |
++:====================================+:========================+:====================+:==============+
+| Central Coast & Hunter              | Newcastle               | 10                  | October 2019  |
++-------------------------------------+-------------------------+---------------------+---------------+
+| Mid North Coast & Northern NSW      | Lismore                 | 5                   | October 2019  |
++-------------------------------------+-------------------------+---------------------+---------------+
+| New England                         | Tamworth                | \<5                 | October 2019  |
++-------------------------------------+-------------------------+---------------------+---------------+
+| Western NSW                         | Bathurst                | \<5                 | October 2019  |
++-------------------------------------+-------------------------+---------------------+---------------+
+| South Western Sydney                | Campbelltown            | 5                   | November 2019 |
++-------------------------------------+-------------------------+---------------------+---------------+
+| Nepean Blue Mountains               | Penrith                 | 5                   | November 2019 |
++-------------------------------------+-------------------------+---------------------+---------------+
+| Illawarra Shoalhaven & Southern NSW | Wollongong              | \<5                 | November 2019 |
++-------------------------------------+-------------------------+---------------------+---------------+
+
+Details of Focus Groups with PYI service providers
+:::
+
+#### PYI housing providers
+
+Housing provision for participants was managed either through a dedicated role within the service provider organisation or by a separate organization for those operating within a consortium. Interviews with housing provider representatives were conducted independently from service provider interviews due to their distinct focus. These interviews were conducted virtually via Zoom due to COVID-19 social distancing restrictions in place at the time. All housing providers except one participated in the interviews. Details of the interviews are summarised in Table @supptbl-interviews-housing-providers.
+
+::: {#supptbl-interviews-housing-providers float="supptbl"}
+| PYI provider catchment              | Month held  |
+|:------------------------------------|:------------|
+| Central Coast & Hunter              | August 2020 |
+| Mid North Coast & Northern NSW      | August 2020 |
+| New England                         | August 2020 |
+| South Western Sydney                | August 2020 |
+| Nepean Blue Mountains               | Not held    |
+| Illawarra Shoalhaven & Southern NSW | August 2020 |
+
+Details of Focus Groups with PYI housing providers
+:::
+
+### Recruitment and consent process
+
+<h4>Invitation:</h4>
+
+-   The Evaluation Team contacted PYI providers by email in August and September 2019 to provide information about the focus groups and their scope.
+-   The Evaluation Team contacted PYI housing providers by email in August 2020 to provide information about the focus groups and their scope.
+-   Additional contact was made with provider contacts to answer questions and clarify the content and scope of the focus groups.
+
+<h4>Recruitment:</h4>
+
+-   Providers were emailed a copy of the Explanatory Statement and Discussion Guide approved by the Monash University Human Research Ethics Committee and asked to review it and identify the individuals within their organisation who were best placed to provide input.
+-   The Evaluation Team liaised with providers to find a mutually beneficial date and time to hold the focus group.
+
+<h4>Consent:</h4>
+
+-   Prior to the focus group participants were provided with a copy of the Explanatory Statement, consent details and discussion guide
+-   The facilitator verbally went through the explanatory statement and consent procedures prior to commencement
+
+### Discussion guide
+
+We have developed a discussion guide based upon the domains of the Consolidated Framework for Implementation Research (CFIR). The CFIR is a meta-theoretical framework that synthesises information and evidence about constructs and domains that affect implementation processes.
+
+Implementation enablers and barriers can be related to five different areas: the types of services offered; the individuals involved in implementing the service; the organisation setting in which the service is implemented; the organisations outer context; and the quality of the implementation process itself. In the focus group, we will briefly discuss the five areas that impact implementation and then ask for your input about which areas you think are key challenges or enablers for PYI service providers.
+
+*Note:* This discussion guide is indicative and may not be reflective of the exact content
+
+<h4>Purpose and consent</h4>
+
+Evaluation Team to provide brief overview of the purpose of the focus group and how it will be used to inform the evaluation. Verbal consent will be obtained in order to record the teleconference and use the information provided to inform our evaluation findings.
+
+<h4>Introductions</h4>
+
+Please introduce yourself to the group and tell us how long you have been involved with the Premiers Youth Initiative (PYI). What is your current role (program manager, executive manager, administrator) in relation to PYI?
+
+<h4>The types of services offered</h4>
+
+*What is it?* — The types of services offered are important because the different attributes (complexity, adaptability, cost, evidence strength and quality and design quality) of the services will influence how easy it can be taken up by individuals and service provider agencies.
+
+*Indicative talking points:*
+
+-   What are some troubles that your clients face?
+-   What do you do to help clients?
+-   Is there anything you can’t do?
+
+<h4>The Individuals involved</h4>
+
+*What is it?* — The individuals involved in implementing the service are important because their skills, expertise, attitudes, behaviours and values influence how they engage in the implementation process and how the organisation setting operates.
+
+*Indicative talking points:*
+
+-   How were the PYI guidelines interpreted by your team?
+-   What are they three things that they do always?
+-   How do they work together?
+
+<h4>The external context</h4>
+
+*What is it?* — The organisation’s outer context is important because funding structures, legislation, policy agendas and similar factors in the environment of the implementation can change or totally stop an implementation.
+
+*Indicative talking points:*
+
+-   What challenges did you experience outside of your workplace (i.e. outside your control) that have made it difficult to implement PYI?
+-   Are you able to get the things they need in a timely fashion?
+-   Are there things that they need that you can’t get them?
+
+<h4>The organisational context</h4>
+
+*What is it?* — The organisation setting in which the service is implemented is important because factors such as hierarchical structures, culture, communication and access to training and resources will influence how quickly and easily a new program can be taken up and utilised by an organisation.
+
+*Indicative talking points:*
+
+-   In what ways were service providers well-prepared to deliver PYI?
+-   How do you know what your clients need?
+
+<h4>The quality of the implementation process</h4>
+
+*What is it?* — The quality of the implementation process itself is important because the attention paid, resources invested, and commitment made to an implementation process will enhance, or diminish, the likelihood of its success.
+
+*Indicative talking points:*
+
+-   How did the process of implementing the PYI work?
+-   What are you doing that works to improve outcomes for your clients?
+
+<h4>Overall</h4>
+
+Do you have any other feedback on how PYI could be strengthened to better meet the needs of the young people it seeks to support? Please explain.
+
+## Focus groups with representatives from the funder {#sec-qualitative-sample-funder}
+
+### Participant details
+
+The intervention was developed and funded by the NSW Department of Communities and Justice (DCJ). Program oversight was managed by the central office in Sydney, while day-to-day engagement between the funding body and service providers was coordinated by district-level representatives. Focus group participants included the program manager (from the central office) and contract managers from all districts where the intervention was implemented. These focus groups were conducted virtually via Zoom due to COVID-19 social distancing restrictions in place at the time. Details are summarised in @supptbl-focus-group-funder.
+
+::: {#supptbl-focus-group-funder float="supptbl"}
+| PYI provider catchment | Number of attendees | Month held |
+|:---|---:|:---|
+| Statewide — Central office | 3 | August 2020 |
+| Central Coast, Hunter & New England | 4 | August 2020 |
+| Mid North Coast & Northern NSW | 2 | August 2020 |
+| Western NSW, Illawarra Shoalhaven & Southern NSW | 2 | August 2020 |
+| South Western Sydney & Nepean Blue Mountains | 4 | August 2020 |
+
+Details of Focus Groups with representatives from the funder
+:::
+
+### Recruitment and consent process
+
+<h4>Invitation:</h4>
+
+-   Representatives from the funder were nominated by the program manager at DCJ central office.
+-   The Evaluation Team contacted nominated contacts by email in August 2020 to provide information about the focus groups and their scope.
+
+<h4>Recruitment:</h4>
+
+-   Nominated representatives from DCJ were emailed a copy of the Explanatory Statement and Discussion Guide approved by the Monash University Human Research Ethics Committee and asked to review it prior to the focus group.
+-   The Evaluation Team liaised with representatives from DCJ to find a mutually beneficial date and time to hold the focus group.
+
+<h4>Consent:</h4>
+
+-   The facilitator verbally went through the explanatory statement and consent procedures prior to commencement
+
+### Discussion guide
+
+We have compiled a series of questions based upon the domains of the Consolidated Framework for Implementation Research (CFIR). The CFIR is a meta-theoretical framework that synthesises information and evidence about constructs and domains that affect implementation processes.
+
+Implementation enablers and barriers can be related to five different areas: the types of services offered; the individuals involved in implementing the service; the organisational setting in which the service is implemented; the organisations outer context; and the quality of the implementation process itself. We are interested in obtaining your input about which areas you think are key challenges or enablers in the implementation of PYI.
+
+*Note:* This discussion guide is indicative and may not be reflective of the exact content
+
+<h4>The types of services offered</h4>
+
+*What is it?* — The types of services offered are important because the different attributes (complexity, adaptability, cost, evidence strength and quality and design quality) of the services will influence how easy it can be taken up by individuals and service provider agencies.
+
+*Specific questions:*
+
+-   In what context was PYI developed?
+-   How was this population served before PYI? • How did it fit into the broader policy/reform context?
+-   What decisions led to the current model being pursued?
+
+<h4>The Individuals involved</h4>
+
+*What is it?* — The individuals involved in implementing the service are important because their skills, expertise, attitudes, behaviours and values influence how they engage in the implementation process and how the organisation setting operates.
+
+*Specific questions:*
+
+-   How were the program’s goals decided?
+-   How was local demand for services estimated in each location?
+
+<h4>The external context</h4>
+
+*What is it?* — The organisation’s outer context is important because funding structures, legislation, policy agendas and similar factors in the environment of the implementation can change or totally stop an implementation.
+
+*Specific questions:*
+
+-   By the time they left care, what did DCJ envision PYI clients would be prepared for by their case workers?
+
+<h4>The organisational context</h4>
+
+*What is it?* — The organisation setting in which the service is implemented is important because factors such as hierarchical structures, culture, communication and access to training and resources will influence how quickly and easily a new program can be taken up and utilised by an organisation.
+
+*Specific questions:*
+
+-   What does a successful outcome for PYI clients look like from DCJ’s perspective?
+
+<h4>The quality of the implementation process</h4>
+
+*What is it?* — The quality of the implementation process itself is important because the attention paid, resources invested, and commitment made to an implementation process will enhance, or diminish, the likelihood of its success.
+
+*Specific questions:*
+
+-   Did you think the CIT and DIT structure suited the needs of this project?
+-   What elements of this structure/process do you think worked well?
+
+<h4>Overall</h4>
+
+-   Do you have any thoughts on how PYI could be strengthened to better meet the needs of the young people it seeks to support? Please explain.
 
 # Supplementary results {#sec-results}
 
@@ -186,12 +603,12 @@ We have defined the variables that we used in our matching and outcome models in
 
 ### Assessing sample balance
 
-@fig-pyi-love-plot presents a love plot, a diagnostic tool for assessing covariate balance before and after matching. It displays the standardized mean differences (SMDs) for each covariate included in the matching model, providing a scale-independent measure of balance that is unaffected by sample size. Covariate balance is essential for causal inference, as it ensures that intervention and comparison groups are sufficiently comparable, reducing sensitivity to model misspecification and improving the validity of treatment effect estimates. Prior to matching, six of nine covariates exceeded the commonly recommended threshold of 0.1 SMD, indicating poor balance; however, both matching methods improved balance substantially, with full matching achieving excellent balance across all covariates.
+@suppfig-pyi-love-plot presents a love plot, a diagnostic tool for assessing covariate balance before and after matching. It displays the standardized mean differences (SMDs) for each covariate included in the matching model, providing a scale-independent measure of balance that is unaffected by sample size. Covariate balance is essential for causal inference, as it ensures that intervention and comparison groups are sufficiently comparable, reducing sensitivity to model misspecification and improving the validity of treatment effect estimates. Prior to matching, six of nine covariates exceeded the commonly recommended threshold of 0.1 SMD, indicating poor balance; however, both matching methods improved balance substantially, with full matching achieving excellent balance across all covariates.
 
+::: {#suppfig-pyi-love-plot float="suppfig"}
 ```{r}
-#| label: fig-pyi-love-plot
 #| echo: false
-#| fig-cap: Distribution of propensity scores under different matching specifications
+#| suppfig-cap: Distribution of propensity scores under different matching specifications
 #| cache: true
 
 love_plot_data_location <- "../supplementary-material/inputs/love_plot_data.rds"
@@ -306,14 +723,16 @@ love_plot_data |>
   )
 ```
 
+Distribution of propensity scores under different matching specifications
+:::
+
 ### Assessing common support
 
-The common support assumption requires that the probability of receiving treatment conditional on covariates $X$ lies strictly between 0 and 1: $0 < P(D=1|X) < 1$ where $D$ is the treatment indicator and $X$ represents the vector of covariates used for matching. This condition requires that there is overlap in the distribution of propensity scores between those who receive the intervention and comparison across the range of scores, in order for a counterfactual to be valid [@heckman1997matchingeconometricevaluation]. We assessed this visually using a balance plot (@fig-pyi-halfmoon-plot), which shows the distribution of propensity scores for the intervention and comparison groups under both matching specifications. The plot shows that both specifications achieve substantial overlap in the propensity score distributions between individuals in the intervention and comparison samples, suggesting the analysis meets the common support assumption.
+The common support assumption requires that the probability of receiving treatment conditional on covariates $X$ lies strictly between 0 and 1: $0 < P(D=1|X) < 1$ where $D$ is the treatment indicator and $X$ represents the vector of covariates used for matching. This condition requires that there is overlap in the distribution of propensity scores between those who receive the intervention and comparison across the range of scores, in order for a counterfactual to be valid [@heckman1997matchingeconometricevaluation]. We assessed this visually using a balance plot (@suppfig-pyi-halfmoon-plot), which shows the distribution of propensity scores for the intervention and comparison groups under both matching specifications. The plot shows that both specifications achieve substantial overlap in the propensity score distributions between individuals in the intervention and comparison samples, suggesting the analysis meets the common support assumption.
 
+::: {#suppfig-pyi-halfmoon-plot float="suppfig"}
 ```{r}
-#| label: fig-pyi-halfmoon-plot
 #| echo: false
-#| fig-cap: Distribution of propensity scores under different matching specifications
 #| cache: true
 
 balance_plot_data_location <- "../supplementary-material/inputs/balance_plot_data.rds"
@@ -378,11 +797,13 @@ balance_plot_data |>
   )
 ```
 
+Distribution of propensity scores under different matching specifications
+:::
+
 ## Treatment effect results {#sec-treatment-effect}
 
+::: {#supptbl-pyi-att-full-match float="supptbl"}
 ```{r}
-#| label: tbl-pyi-att-full-match
-#| tbl-cap: "ATT estimates from full matching specification" 
 #| echo: false
 #| cache: false
 
@@ -499,9 +920,11 @@ combined_att_results_full_match_table <- combined_att_results_full_match_table_d
 combined_att_results_full_match_table
 ```
 
+ATT estimates from full matching specification
+:::
+
+::: {#supptbl-pyi-att-nn-match float="supptbl"}
 ```{r}
-#| label: tbl-pyi-att-nn-match
-#| tbl-cap: "ATT estimates from nearest neighbour matching specification" 
 #| echo: false
 #| cache: false
 
@@ -618,13 +1041,15 @@ combined_att_results_nn_match_table <- combined_att_results_nn_match_table_data 
 combined_att_results_nn_match_table
 ```
 
+ATT estimates from nearest neighbour matching specification
+:::
+
 ## Heterogeneous treatment effects {#sec-hts}
 
 ### HTE x 'In homelessness spell on 18th birthday'
 
+::: {#suppfig-hte-in-housing-spell-on-date-18 float="suppfig"}
 ```{r}
-#| label: fig-pyi-hte-in-housing-spell-on-date-18
-#| fig-cap: "Heterogenous treatment effects for 'In homelessness spell on 18th birthday'" 
 #| echo: false
 #| cache: true
 
@@ -708,11 +1133,13 @@ hte_in_housing_spell_on_date_18_plot_data |>
   )
 ```
 
+Heterogenous treatment effects for 'In homelessness spell on 18th birthday'
+:::
+
 ### HTE x 'In homelessness spell on 19th birthday'
 
+::: {#suppfig-in-housing-spell-on-date-19 float="suppfig"}
 ```{r}
-#| label: fig-pyi-hte-in-housing-spell-on-date-19
-#| fig-cap: "Heterogenous treatment effects for 'In homelessness spell on 19th birthday'" 
 #| echo: false
 #| cache: true
 
@@ -796,11 +1223,13 @@ hte_in_housing_spell_on_date_19_plot_data |>
   )
 ```
 
+Heterogenous treatment effects for 'In homelessness spell on 19th birthday'
+:::
+
 ### HTE x 'New homelessness spell between 18th & 19th birthday'
 
+::: {#suppfig-hte-new-housing-spell-between-18-19 float="suppfig"}
 ```{r}
-#| label: fig-pyi-hte-new-housing-spell-between-18-19
-#| fig-cap: "Heterogenous treatment effects for 'New homelessness spell between 18th & 19th birthday'" 
 #| echo: false
 #| cache: true
 
@@ -884,11 +1313,13 @@ hte_new_housing_spell_between_18_19_plot_data |>
   )
 ```
 
+Heterogenous treatment effects for 'New homelessness spell between 18th & 19th birthday'
+:::
+
 ### HTE x 'New or ongoing homelessness spell between 18th & 19th birthday'
 
+::: {#suppfig-hte-new-ongoing-housing-spell-between-18-19 float="suppfig"}
 ```{r}
-#| label: fig-pyi-hte-new-ongoing-housing-spell-between-18-19
-#| fig-cap: "Heterogenous treatment effects for 'New or ongoing homelessness spell between 18th & 19th birthday'" 
 #| echo: false
 #| cache: true
 
@@ -972,11 +1403,13 @@ hte_any_housing_spell_between_18_19_plot_data |>
   )
 ```
 
+Heterogenous treatment effects for 'New or ongoing homelessness spell between 18th & 19th birthday'
+:::
+
 ### HTE x 'New unsheltered homelessness spell between 18th and 19th birthday'
 
+::: {#suppfig-hte-new-unsheltered-homelessness-between-18-19 float="suppfig"}
 ```{r}
-#| label: fig-pyi-hte-new-unsheltered-homelessness-between-18-19
-#| fig-cap: "Heterogenous treatment effects for 'New unsheltered homelessness spell between 18th and 19th birthday'" 
 #| echo: false
 #| cache: true
 
@@ -1060,11 +1493,13 @@ hte_new_unsheltered_homelessness_between_18_19_plot_data |>
   )
 ```
 
+Heterogenous treatment effects for 'New unsheltered homelessness spell between 18th and 19th birthday'
+:::
+
 ### HTE x 'New or ongoing unsheltered homelessness spell between 18th and 19th birthday'
 
+::: {#suppfig-hte-new-ongoing-unsheltered-homelessness-between-18-19 float="suppfig"}
 ```{r}
-#| label: fig-pyi-hte-new-ongoing-unsheltered-homelessness-between-18-19
-#| fig-cap: "Heterogenous treatment effects for 'New or ongoing unsheltered homelessness spell between 18th and 19th birthday'" 
 #| echo: false
 #| cache: true
 
@@ -1148,11 +1583,13 @@ hte_new_ongoing_unsheltered_homelessness_between_18_19_plot_data |>
   )
 ```
 
+Heterogenous treatment effects for 'New or ongoing unsheltered homelessness spell between 18th and 19th birthday'
+:::
+
 ### HTE x 'In new homelessness spell that requires short term accommodation between 18th & 19th birthday'
 
+::: {#suppfig-hte-new-short-term-accommodation-required-between-18-19 float="suppfig"}
 ```{r}
-#| label: fig-pyi-hte-new-short-term-accommodation-required-between-18-19
-#| fig-cap: "Heterogenous treatment effects for 'In new homelessness spell that requires short term accommodation between 18th & 19th birthday'" 
 #| echo: false
 #| cache: true
 
@@ -1236,11 +1673,13 @@ hte_new_short_term_accommodation_required_between_18_19_plot_data |>
   )
 ```
 
+Heterogenous treatment effects for 'In new homelessness spell that requires short term accommodation between 18th & 19th birthday'
+:::
+
 ### HTE x 'In new or ongoing homelessness spell that requires short term accommodation between 18th & 19th birthday'
 
+::: {#suppfig-hte-new-ongoing-short-term-accommodation-required-between-18-19 float="suppfig"}
 ```{r}
-#| label: fig-pyi-hte-new-ongoing-short-term-accommodation-required-between-18-19
-#| fig-cap: "Heterogenous treatment effects for 'In new or ongoing homelessness spell that requires short term accommodation between 18th & 19th birthday'" 
 #| echo: false
 #| cache: true
 
@@ -1324,11 +1763,13 @@ hte_new_ongoing_short_term_accommodation_required_between_18_19_plot_data |>
   )
 ```
 
+Heterogenous treatment effects for 'In new or ongoing homelessness spell that requires short term accommodation between 18th & 19th birthday'
+:::
+
 ### HTE x 'Number of distinct homelessness spells between 18th and 19th birthday'
 
+::: {#suppfig-hte-count-total-spells-18-19 float="suppfig"}
 ```{r}
-#| label: fig-pyi-hte-count-total-spells-18-19
-#| fig-cap: "Heterogenous treatment effects for 'Number of distinct homelessness spells between 18th and 19th birthday'" 
 #| echo: false
 #| cache: true
 
@@ -1412,11 +1853,13 @@ hte_count_total_spells_18_19_plot_data |>
   )
 ```
 
+Heterogenous treatment effects for 'Number of distinct homelessness spells between 18th and 19th birthday'
+:::
+
 ### HTE x 'Days in homelessness spell between 18th and 19th birthday'
 
+::: {#suppfig-hte-time-in-housing-support-18-19 float="suppfig"}
 ```{r}
-#| label: fig-pyi-hte-time-in-housing-support-18-19
-#| fig-cap: "Heterogenous treatment effects for 'Days in homelessness spell between 18th and 19th birthday'" 
 #| echo: false
 #| cache: true
 
@@ -1500,28 +1943,15 @@ hte_time_in_housing_support_18_19_plot_data |>
   )
 ```
 
-```{r}
-#| echo: false
-
-# In homelessness spell on 18th birthday                                                                  
-# In homelessness spell on 19th birthday                                                                  
-# New homelessness spell between 18th & 19th birthday                                                     
-# Any homelessness spell between 18th & 19th birthday                                                     
-# New unsheltered homelessness spell between 18th and 19th birthday                                       
-# New or ongoing unsheltered homelessness spell between 18th and 19th birthday                            
-# In new homelessness spell that requires short term accommodation between 18th & 19th birthday           
-# In new or ongoing homelessness spell that requires short term accommodation between 18th & 19th birthday
-# Number of distinct homelessness spells between 18th and 19th birthday  
-# Days in homelessness spell between 18th and 19th birthday   
-```
+Heterogenous treatment effects for 'Days in homelessness spell between 18th and 19th birthday'
+:::
 
 ## Subgroup analysis {#sec-subgroup-analysis}
 
 ### Subgroup analysis by sex
 
+::: {#supptbl-pyi-subgroup-analysis-sex-full-match float="supptbl"}
 ```{r}
-#| label: tbl-pyi-subgroup-analysis-sex-full-match
-#| tbl-cap: "Results for subgroup analysis by sex for full matching specification" 
 #| echo: false
 #| cache: false
 
@@ -1661,9 +2091,11 @@ combined_subgroup_sex_results_full_match |>
   style_tt(j = 2:21, align = "c") 
 ```
 
+Results for subgroup analysis by sex for full matching specification
+:::
+
+::: {#supptbl-pyi-subgroup-analysis-sex-nn-match float="supptbl"}
 ```{r}
-#| label: tbl-pyi-subgroup-analysis-sex-nn-match
-#| tbl-cap: "Results for subgroup analysis by sex for nearest neighbour matching specification" 
 #| echo: false
 #| cache: false
 
@@ -1803,11 +2235,13 @@ combined_subgroup_sex_results_nn_match |>
   style_tt(j = 2:21, align = "c")  
 ```
 
+Results for subgroup analysis by sex for nearest neighbour matching specification
+:::
+
 ### Subgroup analysis by Aboriginal and Torres Strait Islander status
 
+::: {#supptbl-pyi-subgroup-analysis-aboriginal-full-match float="supptbl"}
 ```{r}
-#| label: tbl-pyi-subgroup-analysis-aboriginal-full-match
-#| tbl-cap: "Results for subgroup analysis by Aboriginal and Torres Strait Islander status for full matching specification" 
 #| echo: false
 #| cache: false
 
@@ -1947,9 +2381,11 @@ combined_subgroup_aboriginal_results_full_match |>
   style_tt(j = 2:21, align = "c") 
 ```
 
+Results for subgroup analysis by Aboriginal and Torres Strait Islander status for full matching specification
+:::
+
+::: {#supptbl-pyi-subgroup-analysis-aboriginal-nn-match float="supptbl"}
 ```{r}
-#| label: tbl-pyi-subgroup-analysis-aboriginal-nn-match
-#| tbl-cap: "Results for subgroup analysis by Aboriginal and Torres Strait Islander status for nearest neighbour matching specification" 
 #| echo: false
 #| cache: false
 
@@ -2089,11 +2525,13 @@ combined_subgroup_aboriginal_results_nn_match |>
   style_tt(j = 2:21, align = "c") 
 ```
 
+Results for subgroup analysis by Aboriginal and Torres Strait Islander status for nearest neighbour matching specification
+:::
+
 ### Subgroup analysis by Housing vulnerability
 
+::: {#supptbl-pyi-subgroup-analysis-housing-vulnerability-full-match float="supptbl"}
 ```{r}
-#| label: tbl-pyi-subgroup-analysis-housing-vulnerability-full-match
-#| tbl-cap: "Results for subgroup analysis by housing vulnerability for full matching specification" 
 #| echo: false
 #| cache: false
 
@@ -2233,9 +2671,11 @@ combined_subgroup_housing_vulnerability_results_full_match |>
   style_tt(j = 2:21, align = "c") 
 ```
 
+Results for subgroup analysis by housing vulnerability for full matching specification
+:::
+
+::: {#supptbl-pyi-subgroup-analysis-housing-vulnerability-nn-match float="supptbl"}
 ```{r}
-#| label: tbl-pyi-subgroup-analysis-housing-vulnerability-nn-match
-#| tbl-cap: "Results for subgroup analysis by housing vulnerability for nearest neighbour matching specification" 
 #| echo: false
 #| cache: false
 
@@ -2375,11 +2815,15 @@ combined_subgroup_housing_vulnerability_results_nn_match |>
   style_tt(j = 2:21, align = "c")
 ```
 
+Results for subgroup analysis by housing vulnerability for nearest neighbour matching specification
+:::
+
 ## Sensitivity analysis {#sec-sensitivity-analysis}
 
+We conducted sensitivity analyses for unmeasured confounding on binary outcomes using tipping point analysis using `tipr` [@mcgowan2022tiprpackagesensitivity]. In @supptbl-pyi-sensitivity-analysis-tip, we present the results of three scenarios (low, medium, high) where the potential unmeasured confounder-exposure relationship was calibrated based on the observed minimum and maximum prevalence differences of measured confounders in our unmatched sample. Since we did not detect any precise ATT estimates, the results of this analysis indicate the strength of confounder-outcome relationships that would be required to flip the sign of our point estimates under different scenarios (noting that their confidence intervals already span zero). For binary outcomes assessed under full matching, an unmeasured confounder would need to have a relationship with the outcome between 0.3-1.0 times that of the treatment-outcome relationship to reverse the direction of the observed point estimate. The required relationships are substantially larger for nearest neighbour specifications, ranging from 1.3-2.9 times the treatment-outcome relationship.
+
+::: {#supptbl-pyi-sensitivity-analysis-tip float="supptbl"}
 ```{r}
-#| label: tbl-pyi-sensitivity-analysis-tip
-#| tbl-cap: "Results for sensitivity analysis" 
 #| echo: false
 #| cache: false
 
@@ -2422,6 +2866,9 @@ sensitivity_analysis_results |>
     ) 
 
 ```
+
+Results of tipping point analysis for both matching specifications under three scenarios
+:::
 
 <h1>References</h1>
 
