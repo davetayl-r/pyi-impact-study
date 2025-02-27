@@ -78,7 +78,7 @@ knitr::opts_chunk$set(
 
 # About
 
-This page contains supplementary material for a study titled *"A Hybrid type-1 Implementation-Effectiveness Study of an Accommodation and Support Intervention for Care Leavers in Australia: Using Propensity Score Matching to Examine Homelessness Outcomes"*.
+This page contains supplementary material for a study titled *"Examining the impact of an Accommodation and Support Intervention in reducing homelessness amongst Care Leavers in Australia: A hybrid type-1 Implementation-Effectiveness Study using Propensity Score methods"*.
 
 The following information is provided here:
 
@@ -88,15 +88,15 @@ The following information is provided here:
 
 -   [*Propensity Score Methods reporting checklist*](#sec-matching-checklist) --- details how this paper fulfils the guidelines on PSM reporting suggested by @thoemmes2011systematicreviewpropensity.
 
-[**Supplementary methodology:**](#sec-methodology%7D)
+[**Supplementary methodology:**](#sec-methodology)
 
 -   [*Variables from administrative data*](#sec-variables) --- defines the variables used in our matching and outcome models.
 
 -   [*Matching diagnostic tests*](#sec-match-diagnostic) --- includes the diagnostic visualisations we used to assess covariate balance and common support.
 
--   [*Focus groups with intervention participants*](#sec-qualitative—sample-participants)
+-   [*Focus groups with intervention participants*](#sec-qualitative—sample-participants) --- provides details on participants, recruitment and consent procedures and protocols
 
--   [*Focus groups with provider and funder stakeholders*](#sec-qualitative—sample-provider-funder)
+-   [*Focus groups with provider and funder stakeholders*](#sec-qualitative—sample-provider-funder) --- provides details on participants, consent procedures and protocols
 
 [**Supplementary results:**](#sec-results)
 
@@ -315,7 +315,7 @@ Details of focus groups with intervention participants
 
 <h4>Recruitment</h4>
 
--   Young people receiving PYI services, aged 18 years or older, were invited by their PYI providers to participate in a focus group on the PYI program (PYI providers were provided with an explanatory statement, consent forms and discussion guides to assist in the recruitment of young people for interview)
+-   Young people receiving PYI services, aged 18 years or older, were invited by their PYI providers to participate in a focus group on the PYI program (PYI providers were provided with an explanatory statement, consent forms and protocol to assist in the recruitment of young people for interview)
 -   Providers used the Explanatory Statement approved by the Monash University Human Research Ethics Committee to inform young people about the purpose and nature of the focus group and invite them to participate
 
 <h4>Focus groups</h4>
@@ -323,17 +323,17 @@ Details of focus groups with intervention participants
 -   Focus groups were held in-person at or near the PYI providers usual place of business
 -   Sessions lasted for between 60 minutes
 -   Sessions were facilitated by two experienced qualitative researchers from CEI — one of whom had qualifications in either social work or psychology — who shared roles as moderator and scribe
--   A semi-structured discussion guide was developed to guide discussion — it is included in @sec-participant-discussion-guide.
+-   A semi-structured protocol was developed to guide discussion — it is included in @sec-participant-protocol.
 
 <h4>Consent</h4>
 
--   Prior to the focus group participants were provided with a copy of the Explanatory Statement, consent details and discussion guide
+-   Prior to the focus group participants were provided with a copy of the Explanatory Statement, consent details and focus group protocol
 -   The facilitator verbally went through the explanatory statement and consent procedures prior to commencement
 -   Participants signed a consent form with one copy retained by the participant and one retained by the facilitator
 -   Young people who provided consent to participate in the focus groups were provided with a gift voucher — not redeemable for alcohol or tobacco products — valued at \$25
 -   Respondent feedback was recorded by hand by facilitators anonymously to protect the confidentiality of respondents
 
-### Discussion guide {#sec-participant-discussion-guide}
+### Focus group protocol {#sec-participant-protocol}
 
 <h4>Introduction</h4>
 
@@ -431,17 +431,17 @@ Details of Focus Groups with PYI housing providers
 
 <h4>Recruitment:</h4>
 
--   Providers were emailed a copy of the Explanatory Statement and Discussion Guide approved by the Monash University Human Research Ethics Committee and asked to review it and identify the individuals within their organisation who were best placed to provide input.
+-   Providers were emailed a copy of the Explanatory Statement and focus group protocol approved by the Monash University Human Research Ethics Committee and asked to review it and identify the individuals within their organisation who were best placed to provide input.
 -   The Evaluation Team liaised with providers to find a mutually beneficial date and time to hold the focus group.
 
 <h4>Consent:</h4>
 
--   Prior to the focus group participants were provided with a copy of the Explanatory Statement, consent details and discussion guide
+-   Prior to the focus group participants were provided with a copy of the Explanatory Statement, consent details and protocol
 -   The facilitator verbally went through the explanatory statement and consent procedures prior to commencement
 
-### Discussion guide
+### Focus group protocol
 
-We have developed a discussion guide based upon the domains of the Consolidated Framework for Implementation Research (CFIR). The CFIR is a meta-theoretical framework that synthesises information and evidence about constructs and domains that affect implementation processes.
+We have developed a protocol based upon the domains of the Consolidated Framework for Implementation Research (CFIR). The CFIR is a meta-theoretical framework that synthesises information and evidence about constructs and domains that affect implementation processes.
 
 Implementation enablers and barriers can be related to five different areas: the types of services offered; the individuals involved in implementing the service; the organisation setting in which the service is implemented; the organisations outer context; and the quality of the implementation process itself. In the focus group, we will briefly discuss the five areas that impact implementation and then ask for your input about which areas you think are key challenges or enablers for PYI service providers.
 
@@ -534,14 +534,14 @@ Details of Focus Groups with representatives from the funder
 
 <h4>Recruitment:</h4>
 
--   Nominated representatives from DCJ were emailed a copy of the Explanatory Statement and Discussion Guide approved by the Monash University Human Research Ethics Committee and asked to review it prior to the focus group.
+-   Nominated representatives from DCJ were emailed a copy of the Explanatory Statement and protocol approved by the Monash University Human Research Ethics Committee and asked to review it prior to the focus group.
 -   The Evaluation Team liaised with representatives from DCJ to find a mutually beneficial date and time to hold the focus group.
 
 <h4>Consent:</h4>
 
 -   The facilitator verbally went through the explanatory statement and consent procedures prior to commencement
 
-### Discussion guide
+### Protocol
 
 We have compiled a series of questions based upon the domains of the Consolidated Framework for Implementation Research (CFIR). The CFIR is a meta-theoretical framework that synthesises information and evidence about constructs and domains that affect implementation processes.
 
