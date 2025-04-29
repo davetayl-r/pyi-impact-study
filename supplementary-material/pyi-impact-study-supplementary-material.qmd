@@ -48,19 +48,17 @@ fig-cap-location: "top"
 #| message: false
 #| name: pyi-supplementary-material-global-options
 
-# load required packages in groundhog framework
-library("groundhog")
-
-required_packages <- c(
-  "quarto",
-  "tidyverse",
-  "ggplot2",
-  "tinytable",
-  "kableExtra",
-  "readxl",
-  "showtext",
-  "halfmoon")
-groundhog.library(required_packages, "2025-01-01")
+# load required packages 
+library(quarto)
+library(tidyverse)
+library(ggplot2)
+library(tinytable)
+library(kableExtra)
+library(readxl)
+library(showtext)
+library(halfmoon)
+library(extrafont)
+library(sysfonts)
 
 # ensure required fonts are loaded
 font_add_google("Roboto", "roboto")
