@@ -1,6 +1,6 @@
 # Examining the impact of an Accommodation and Support Intervention in reducing homelessness amongst Care Leavers in Australia: A hybrid type-1 Implementation-Effectiveness Study using Propensity Score methods: supplementary material
 
-[![](https://zenodo.org/badge/DOI/10.5281/zenodo.15302511.svg)](https://doi.org/10.5281/zenodo.15302511)
+[![](https://zenodo.org/badge/DOI/10.5281/zenodo.15302510.svg)](https://doi.org/10.5281/zenodo.15302510)
 
 This repository [hosts a site](https://davetayl-r.github.io/pyi-impact-study/pyi-impact-study-supplementary-material.html) that contains supplementary materia and analysis code for a study titled *"Examining the impact of an Accommodation and Support Intervention in reducing homelessness amongst Care Leavers in Australia: A hybrid type-1 Implementation-Effectiveness Study using Propensity Score methods"* which has been published in *Children and Youth Services Review*.
 
