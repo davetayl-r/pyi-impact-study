@@ -10,26 +10,26 @@ The following information is available as part of the supplementary material sit
 
 ### Reporting Standards:
 
--   **STROBE checklist** -- details of how this paper meets the STROBE reporting guidelines for observational studies
--   **Propensity Score Methods reporting checklist** -- details how this paper fulfils the guidelines on PSM reporting suggested by Thoemmes and Kim (2011).
+-   **STROBE checklist** - details of how this paper meets the STROBE reporting guidelines for observational studies
+-   **Propensity Score Methods reporting checklist** - details how this paper fulfils the guidelines on PSM reporting suggested by Thoemmes and Kim (2011)
 
 ### Supplementary methodology:
 
--   **Variables from administrative data** -- defines the variables used in our matching and outcome models
--   **Matching diagnostic tests** -- includes the diagnostic visualisations we used to assess covariate balance and common support
--   **Focus groups with intervention participants** -- provides details on participants, recruitment and consent procedures and protocols
--   **Focus groups with provider and funder stakeholders** -- provides details on participants, consent procedures and protocols
+-   **Variables from administrative data** - defines the variables used in our matching and outcome models
+-   **Matching diagnostic tests** - includes the diagnostic visualisations we used to assess covariate balance and common support
+-   **Focus groups with intervention participants** - provides details on participants, recruitment and consent procedures and protocols
+-   **Focus groups with provider and funder stakeholders** - provides details on participants, consent procedures and protocols
 
 ### Supplementary results:
 
--   **Treatment effect results** -- includes the full results of our ATT estimates
--   **Heterogenous treatment effects** -- includes figures depicting the results of our analysis of heterogenous treatment effects
--   **Subgroup analysis** -- includes the full results of our subgroup analysis estimating conditional ATT by sex, Aboriginal status and housing vulnerability
--   **Sensitivity analysis** -- includes results of our tipping point analysis for assess for the existence of unmeasured confounding
+-   **Treatment effect results** - includes the full results of our ATT estimates
+-   **Heterogenous treatment effects** - includes figures depicting the results of our analysis of heterogenous treatment effects
+-   **Subgroup analysis** - includes the full results of our subgroup analysis estimating conditional ATT by sex, Aboriginal status and housing vulnerability
+-   **Sensitivity analysis** - includes results of our tipping point analysis for assess for the existence of unmeasured confounding
 
 ## Included in this repo:
 
 The following information is available in the repository:
 
--   the folder `analysis` contains the analytic code used for this analysis
--   the folder `supplementary-material` contains the code required to produce the supplementary material
+-   The folder `analysis` contains the analytic code used for this analysis
+-   The folder `supplementary-material` contains the code required to produce the supplementary material
