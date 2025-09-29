@@ -10,13 +10,13 @@ The following information is available as part of the supplementary material sit
 
 ### Reporting Standards:
 
--   **STROBE checklist** --- details of how this paper meets the STROBE reporting guidelines for observational studies.\
--   **Propensity Score Methods reporting checklist** --- details how this paper fulfils the guidelines on PSM reporting suggested by @thoemmes2011systematicreviewpropensity.
+-   **STROBE checklist** --- details of how this paper meets the STROBE reporting guidelines for observational studies
+-   **Propensity Score Methods reporting checklist** --- details how this paper fulfils the guidelines on PSM reporting suggested by Thoemmes and Kim (2011).
 
 ### Supplementary methodology:
 
--   **Variables from administrative data** --- defines the variables used in our matching and outcome models.
--   **Matching diagnostic tests** --- includes the diagnostic visualisations we used to assess covariate balance and common support.
+-   **Variables from administrative data** --- defines the variables used in our matching and outcome models
+-   **Matching diagnostic tests** --- includes the diagnostic visualisations we used to assess covariate balance and common support
 -   **Focus groups with intervention participants** --- provides details on participants, recruitment and consent procedures and protocols
 -   **Focus groups with provider and funder stakeholders** --- provides details on participants, consent procedures and protocols
 
